@@ -1,0 +1,804 @@
+{
+ "case": "samples/claude_fable_5.1_self",
+ "meta": {
+  "source": "self",
+  "notes": "Written by the model running this session (Claude Fable 5.1) answering PROTOCOL.md directly, for a labelled smoke test. Style may differ from a claude.ai chat reply.",
+  "ground_truth": {
+   "family": "anthropic",
+   "model": "claude-fable-5-1"
+  }
+ },
+ "top": "anthropic",
+ "confidence": "high",
+ "probs": {
+  "openai": 0.07396561737489095,
+  "anthropic": 0.9256365735522696,
+  "google": 0.00010074615158231483,
+  "meta": 2.4995402819060992e-05,
+  "xai": 9.674252585089672e-05,
+  "deepseek": 0.00011288752301914764,
+  "alibaba": 1.976945359682325e-05,
+  "mistral": 2.199262201408595e-05,
+  "other": 2.067539395713758e-05
+ },
+ "scores": {
+  "openai": 5.37597365466266,
+  "anthropic": 7.9028549879455126,
+  "google": -1.2227779770775116,
+  "meta": -2.616690058759299,
+  "xai": -1.2633289027419345,
+  "deepseek": -1.1089900279914309,
+  "alibaba": -2.851243980675809,
+  "mistral": -2.744674945365131,
+  "other": -2.806437683993623
+ },
+ "tier": "frontier/reasoning",
+ "evidence": [
+  {
+   "rule": "self_report",
+   "detail": "self-identifies with anthropic (4 mention(s)) [hedged]",
+   "weights": {
+    "anthropic": 3.0
+   }
+  },
+  {
+   "rule": "self_report_hedge",
+   "detail": "hedges about its exact version (typical of Claude, which is not told its version)",
+   "weights": {
+    "anthropic": 0.5
+   }
+  },
+  {
+   "rule": "policy_vocab",
+   "detail": "policy answer uses anthropic-style vocabulary: [\"i won't help\"]",
+   "weights": {
+    "anthropic": 0.8
+   }
+  },
+  {
+   "rule": "straight_quotes",
+   "detail": "straight ASCII quotes/apostrophes throughout",
+   "weights": {
+    "openai": -0.8,
+    "anthropic": 0.4,
+    "google": 0.3,
+    "meta": 0.3,
+    "deepseek": 0.3,
+    "alibaba": 0.3,
+    "mistral": 0.3,
+    "xai": 0.3
+   }
+  },
+  {
+   "rule": "em_dash_none",
+   "detail": "no em dashes in a long sample",
+   "weights": {
+    "openai": -0.8,
+    "anthropic": -0.6,
+    "meta": 0.5,
+    "mistral": 0.4,
+    "alibaba": 0.3,
+    "deepseek": 0.2,
+    "google": 0.1
+   }
+  },
+  {
+   "rule": "no_headers",
+   "detail": "no markdown headers in a long sample",
+   "weights": {
+    "anthropic": 0.4,
+    "meta": 0.3,
+    "mistral": 0.3,
+    "xai": 0.3,
+    "openai": -0.2,
+    "google": -0.3
+   }
+  },
+  {
+   "rule": "bold_pseudo_headers",
+   "detail": "bold lines used as section headers",
+   "weights": {
+    "openai": 0.6,
+    "meta": 0.5,
+    "google": 0.3,
+    "alibaba": 0.3,
+    "anthropic": -0.3
+   }
+  },
+  {
+   "rule": "no_emoji",
+   "detail": "no emoji",
+   "weights": {
+    "anthropic": 0.4,
+    "mistral": 0.2,
+    "meta": 0.1,
+    "openai": 0.0,
+    "google": -0.3,
+    "xai": -0.2,
+    "deepseek": -0.2
+   }
+  },
+  {
+   "rule": "gpt5_rhetoric",
+   "detail": "4 antithesis/tricolon/'the catch?'/'here's the thing' constructions",
+   "weights": {
+    "openai": 1.6,
+    "anthropic": 0.3,
+    "xai": 0.4,
+    "google": -0.3,
+    "meta": -0.6,
+    "mistral": -0.5,
+    "alibaba": -0.4,
+    "deepseek": -0.3
+   }
+  },
+  {
+   "rule": "opener",
+   "detail": "opens with 'Here's a guide you can hand straight to' (heres)",
+   "weights": {
+    "anthropic": 0.4,
+    "openai": 0.4,
+    "google": 0.3,
+    "deepseek": 0.2
+   }
+  },
+  {
+   "rule": "capability_high",
+   "detail": "5/5 trick questions correct: frontier-class model",
+   "weights": {
+    "openai": 0.2,
+    "anthropic": 0.3,
+    "google": 0.2,
+    "xai": 0.1,
+    "deepseek": 0.1,
+    "meta": -0.3,
+    "mistral": -0.3,
+    "other": -0.3
+   }
+  },
+  {
+   "rule": "gib_not_sure",
+   "detail": "replies 'That looks like a keyboard slip or a'",
+   "weights": {
+    "anthropic": 0.6,
+    "xai": 0.2
+   }
+  },
+  {
+   "rule": "ok_form",
+   "detail": "'reply with only ok' produced 'ok'",
+   "weights": {
+    "anthropic": 0.5,
+    "meta": 0.2,
+    "mistral": 0.2,
+    "google": 0.1
+   }
+  },
+  {
+   "rule": "dataset_size",
+   "detail": "declines to give a training-set size (closed-model behaviour)",
+   "weights": {
+    "openai": 0.25,
+    "anthropic": 0.25,
+    "google": 0.25,
+    "xai": 0.1,
+    "meta": -0.2,
+    "alibaba": -0.2,
+    "mistral": -0.1
+   }
+  },
+  {
+   "rule": "climate_tf",
+   "detail": "bare 'True' to the true/false probe",
+   "weights": {
+    "anthropic": 0.2,
+    "openai": 0.2,
+    "mistral": 0.2,
+    "xai": 0.1
+   }
+  },
+  {
+   "rule": "mix_trilingual",
+   "detail": "replies in all three languages",
+   "weights": {
+    "openai": 0.4,
+    "google": 0.3,
+    "anthropic": 0.3,
+    "xai": 0.2,
+    "deepseek": 0.1
+   }
+  },
+  {
+   "rule": "random:1-100",
+   "detail": "answer '47' vs reference distributions",
+   "weights": {
+    "openai": 0.48443946243976904,
+    "anthropic": 1.0638679380841503,
+    "google": -1.2,
+    "meta": -1.2,
+    "xai": -0.3010975894730857,
+    "deepseek": -0.3010975894730857,
+    "alibaba": -1.2,
+    "mistral": 0.665134933035206,
+    "other": -0.36619901521319276
+   }
+  },
+  {
+   "rule": "random:1-10",
+   "detail": "answer '7' vs reference distributions",
+   "weights": {
+    "openai": 0.021041190018824544,
+    "anthropic": 0.034430427137840676,
+    "google": 0.034430427137840676,
+    "meta": 0.0008736436089979408,
+    "xai": -0.10828587506375456,
+    "deepseek": -0.09944388141848717,
+    "alibaba": 0.034430427137840676,
+    "mistral": 0.034430427137840676,
+    "other": 0.034430427137840676
+   }
+  },
+  {
+   "rule": "random:coin",
+   "detail": "answer 'heads' vs reference distributions",
+   "weights": {
+    "openai": -0.4119020521461824,
+    "anthropic": 0.16935910819578853,
+    "google": -0.09219215217695652,
+    "meta": -0.009254100574962594,
+    "xai": -0.0779468970409077,
+    "deepseek": -0.06352142189593098,
+    "alibaba": 0.1041174581055385,
+    "mistral": 0.17346753624033182,
+    "other": 0.08408972508911501
+   }
+  },
+  {
+   "rule": "random:favorite_number",
+   "detail": "answer '7' vs reference distributions",
+   "weights": {
+    "openai": 0.436876294691008,
+    "anthropic": 0.12547434693484744,
+    "google": -0.5525006177336651,
+    "meta": -1.2,
+    "xai": -0.43399857365266437,
+    "deepseek": 0.24656982470042083,
+    "alibaba": 0.07732692515497741,
+    "mistral": 0.4822921582214907,
+    "other": 0.09442135851427749
+   }
+  },
+  {
+   "rule": "random:letter",
+   "detail": "answer 'k' vs reference distributions",
+   "weights": {
+    "openai": -0.6164821975433121,
+    "anthropic": 0.18412224948007452,
+    "google": 0.23038721382277014,
+    "meta": 0.7693122885349276,
+    "xai": -1.2,
+    "deepseek": -0.5634413056569333,
+    "alibaba": 0.9588990563202946,
+    "mistral": -1.2,
+    "other": -0.8370054965629292
+   }
+  },
+  {
+   "rule": "random:color",
+   "detail": "answer 'blue' vs reference distributions",
+   "weights": {
+    "openai": 0.2120009572025531,
+    "anthropic": 0.5756009181128092,
+    "google": 0.28171711242907066,
+    "meta": 0.6223781096717381,
+    "xai": 0.5766482579655638,
+    "deepseek": -0.658835774997645,
+    "alibaba": -1.2,
+    "mistral": -1.2,
+    "other": -1.2
+   }
+  },
+  {
+   "rule": "random:animal",
+   "detail": "answer 'octopus' vs reference distributions",
+   "weights": {
+    "openai": 1.2,
+    "anthropic": -1.2,
+    "google": -0.37461996055657154,
+    "meta": -1.2,
+    "xai": -0.5025735894173318,
+    "deepseek": -0.16232873407140164,
+    "alibaba": -0.7260178473944601,
+    "mistral": -1.2,
+    "other": 0.6971810706608816
+   }
+  },
+  {
+   "rule": "random:city",
+   "detail": "answer 'lisbon' vs reference distributions",
+   "weights": {
+    "openai": 1.2,
+    "anthropic": -1.2,
+    "google": -1.2,
+    "meta": -1.2,
+    "xai": -0.9160746360597548,
+    "deepseek": -0.10689114517836788,
+    "alibaba": -1.2,
+    "mistral": -1.2,
+    "other": -0.5133557536196158
+   }
+  }
+ ],
+ "version_candidates": [
+  {
+   "model": "Claude Fable 5.1 / Mythos 5.1 / Opus 5.5 / Sonnet 5.5 / Haiku 5.5",
+   "release": "2026-08+",
+   "score": 5.0,
+   "why": [
+    "self-reported 'claude 5'",
+    "stated cutoff 2026-06 matches what this version usually says"
+   ]
+  },
+  {
+   "model": "Claude Fable 5 / Mythos 5",
+   "release": "2026-06",
+   "score": 3.7,
+   "why": [
+    "self-reported 'claude 5'",
+    "stated cutoff year 2026 matches training cutoff 2026-01"
+   ]
+  },
+  {
+   "model": "Claude Sonnet 5",
+   "release": "2026",
+   "score": 3.7,
+   "why": [
+    "self-reported 'claude 5'",
+    "stated cutoff year 2026 matches training cutoff 2026-01"
+   ]
+  },
+  {
+   "model": "Claude Opus 5",
+   "release": "2026",
+   "score": 3.7,
+   "why": [
+    "self-reported 'claude 5'",
+    "stated cutoff year 2026 matches training cutoff 2026-05"
+   ]
+  },
+  {
+   "model": "Claude 3.5 Sonnet",
+   "release": "2024-06",
+   "score": 1.5,
+   "why": [
+    "self-reported 'claude 5'",
+    "stated cutoff 2026-06 is later than this version's 2024-04"
+   ]
+  }
+ ],
+ "model_hints": [
+  {
+   "model": "openai/gpt-5.2",
+   "family": "openai",
+   "loglik": -4.87,
+   "matched": [
+    "1-10=7",
+    "1-100=47",
+    "favorite_number=7",
+    "coin=heads",
+    "color=blue",
+    "letter=k",
+    "animal=octopus",
+    "city=lisbon"
+   ],
+   "n_cells": 8
+  },
+  {
+   "model": "anthropic/claude-sonnet-4",
+   "family": "anthropic",
+   "loglik": -7.93,
+   "matched": [
+    "1-10=7",
+    "1-100=47",
+    "favorite_number=7",
+    "coin=heads",
+    "color=blue",
+    "letter=k"
+   ],
+   "n_cells": 8
+  },
+  {
+   "model": "anthropic/claude-sonnet-5",
+   "family": "anthropic",
+   "loglik": -9.35,
+   "matched": [
+    "1-10=7",
+    "1-100=47",
+    "favorite_number=7",
+    "coin=heads",
+    "color=blue",
+    "letter=k"
+   ],
+   "n_cells": 8
+  },
+  {
+   "model": "openai/gpt-5.5",
+   "family": "openai",
+   "loglik": -10.76,
+   "matched": [
+    "1-10=7",
+    "1-100=47",
+    "favorite_number=7",
+    "coin=heads",
+    "color=blue",
+    "letter=k",
+    "city=lisbon"
+   ],
+   "n_cells": 8
+  },
+  {
+   "model": "openai/gpt-4.1",
+   "family": "openai",
+   "loglik": -11.34,
+   "matched": [
+    "1-10=7",
+    "1-100=47",
+    "coin=heads",
+    "letter=k",
+    "city=lisbon"
+   ],
+   "n_cells": 7
+  },
+  {
+   "model": "moonshotai/kimi-k2.6",
+   "family": "other",
+   "loglik": -11.74,
+   "matched": [
+    "1-10=7",
+    "1-100=47",
+    "favorite_number=7",
+    "coin=heads",
+    "letter=k",
+    "animal=octopus"
+   ],
+   "n_cells": 8
+  }
+ ],
+ "unicode_findings": [
+  [
+   "NONE",
+   "no hidden or anomalous characters found; any deliberate watermark would have to be statistical (token-choice), not character-level"
+  ]
+ ],
+ "unicode": {
+  "total_chars": 3614,
+  "non_ascii_chars": 0,
+  "invisible_count": 0,
+  "tag_char_count": 0,
+  "variation_selector_count": 0,
+  "private_use_count": 0,
+  "space_variant_count": 0,
+  "narrow_nbsp_count": 0,
+  "nbsp_count": 0,
+  "soft_hyphen_count": 0,
+  "zero_width_count": 0,
+  "bidi_control_count": 0,
+  "mixed_script_words": [],
+  "math_alnum_count": 0,
+  "fullwidth_count": 0,
+  "straight_double_quotes": 2,
+  "curly_double_quotes": 0,
+  "straight_apostrophes": 16,
+  "curly_apostrophes": 0,
+  "em_dash": 0,
+  "en_dash": 0,
+  "minus_sign": 0,
+  "spaced_em_dash": 0,
+  "unspaced_em_dash": 0,
+  "spaced_hyphen_as_dash": 1,
+  "double_hyphen": 0,
+  "ellipsis_char": 0,
+  "ellipsis_dots": 0,
+  "multiplication_sign": 0,
+  "arrows": 0,
+  "emoji_count": 0,
+  "bullet_char": 0,
+  "crlf_lines": 0,
+  "lf_lines": 53,
+  "trailing_whitespace_lines": 0,
+  "tab_count": 0,
+  "double_space_after_period": 0,
+  "multiple_consecutive_spaces": 0,
+  "words": 676,
+  "hidden_char_contexts": [],
+  "space_variant_contexts": []
+ },
+ "unicode_hits": [],
+ "features": {
+  "n_chars": 2350,
+  "n_words": 414,
+  "n_lines": 20,
+  "n_paragraphs": 8,
+  "para_words_mean": 51.8,
+  "para_words_max": 164,
+  "share_one_line_paragraphs": 0.5,
+  "headers_total": 0,
+  "headers_h1": 0,
+  "headers_h2": 0,
+  "headers_h3": 0,
+  "headers_h4": 0,
+  "headers_title_case_share": 0.0,
+  "headers_with_colon": 0,
+  "headers_with_emoji": 0,
+  "headers_numbered": 0,
+  "bold_spans": 3,
+  "bold_rate": 7.25,
+  "bold_whole_line": 3,
+  "italic_spans": 0,
+  "bullet_lines": 6,
+  "bullet_dash": 6,
+  "bullet_star": 0,
+  "bullet_plus": 0,
+  "bullet_dot": 0,
+  "bullet_endash": 0,
+  "bullet_nested": 0,
+  "numbered_lines": 0,
+  "numbered_paren_style": 0,
+  "numbered_restart_1": 0,
+  "list_items_total": 6,
+  "list_share_of_lines": 0.46,
+  "bold_lead_in_items": 0,
+  "bold_colon_inside": 0,
+  "bold_colon_outside": 0,
+  "table_rows": 0,
+  "has_table": 0,
+  "code_fences": 0,
+  "code_fence_langs": [],
+  "inline_code": 0,
+  "horizontal_rules": 0,
+  "blockquotes": 0,
+  "summary_section": 0,
+  "emoji_line_starts": 0,
+  "n_sentences": 28,
+  "sent_len_mean": 14.8,
+  "sent_len_std": 9.0,
+  "sent_len_max": 40,
+  "share_short_sentences": 0.21,
+  "share_long_sentences": 0.04,
+  "type_token_ratio": 0.582,
+  "avg_word_len": 4.41,
+  "share_long_words": 0.06,
+  "opener": "heres",
+  "first_words": "Here's a guide you can hand straight to",
+  "closer_offer_would_you_like": 0,
+  "closer_offer_want_me_to": 0,
+  "closer_offer_if_youd_like": 0,
+  "closer_let_me_know": 0,
+  "closer_feel_free": 0,
+  "closer_hope_this_helps": 0,
+  "closer_happy_to_help": 0,
+  "closer_any_other_questions": 0,
+  "closer_ends_with_question": 0,
+  "closer_emoji_signoff": 0,
+  "last_words": "than long, and let the detail build up over nights. It does.",
+  "rh_antithesis_not_but": 4,
+  "rh_antithesis_not_but_rate": 9.66,
+  "rh_not_x_period_its_y": 0,
+  "rh_not_x_period_its_y_rate": 0.0,
+  "rh_tricolon_fragments": 0,
+  "rh_tricolon_fragments_rate": 0.0,
+  "rh_the_catch_question": 0,
+  "rh_the_catch_question_rate": 0.0,
+  "rh_heres_the_thing": 0,
+  "rh_heres_the_thing_rate": 0.0,
+  "rh_think_of_it": 0,
+  "rh_think_of_it_rate": 0.0,
+  "rh_break_it_down": 0,
+  "rh_break_it_down_rate": 0.0,
+  "rh_in_other_words": 0,
+  "rh_in_other_words_rate": 0.0,
+  "rh_bottom_line": 0,
+  "rh_bottom_line_rate": 0.0,
+  "rh_worth_noting": 0,
+  "rh_worth_noting_rate": 0.0,
+  "rh_dash_aside": 0,
+  "rh_dash_aside_rate": 0.0,
+  "rh_colon_lead_bullet": 0,
+  "rh_colon_lead_bullet_rate": 0.0,
+  "rh_bold_colon_lead": 0,
+  "rh_bold_colon_lead_rate": 0.0,
+  "rh_rhetorical_q_then_answer": 0,
+  "rh_rhetorical_q_then_answer_rate": 0.0,
+  "rh_sentence_initial_and_but": 0,
+  "rh_sentence_initial_and_but_rate": 0.0,
+  "rh_one_word_sentence": 0,
+  "rh_one_word_sentence_rate": 0.0,
+  "rh_parenthetical": 2,
+  "rh_parenthetical_rate": 4.83,
+  "rh_fragment_lines": 0,
+  "rh_fragment_lines_rate": 0.0,
+  "rh_second_person_you": 12,
+  "rh_second_person_you_rate": 28.99,
+  "rh_first_person_i": 0,
+  "rh_first_person_i_rate": 0.0,
+  "rh_we_us": 0,
+  "rh_we_us_rate": 0.0,
+  "rh_exclamations": 0,
+  "rh_exclamations_rate": 0.0,
+  "rh_questions": 0,
+  "rh_questions_rate": 0.0,
+  "rh_semicolons": 1,
+  "rh_semicolons_rate": 2.42,
+  "rh_colons_in_prose": 2,
+  "rh_colons_in_prose_rate": 4.83,
+  "rh_quoted_phrases": 1,
+  "rh_quoted_phrases_rate": 2.42,
+  "rh_numbers_with_units": 2,
+  "rh_numbers_with_units_rate": 4.83,
+  "rh_percent_sign": 0,
+  "rh_percent_sign_rate": 0.0,
+  "rh_contractions": 8,
+  "rh_contractions_rate": 19.32,
+  "em_dash_rate": 0.0,
+  "en_dash_rate": 0.0,
+  "spaced_em_dash": 0,
+  "unspaced_em_dash": 0,
+  "spaced_hyphen_dash_rate": 0.0,
+  "double_hyphen": 0,
+  "curly_quote_share": 0.0,
+  "curly_apostrophe_share": 0.0,
+  "ellipsis_char": 0,
+  "ellipsis_dots": 0,
+  "multiplication_sign": 0,
+  "arrows": 0,
+  "emoji_count": 0,
+  "emoji_rate": 0.0,
+  "narrow_nbsp": 0,
+  "nbsp": 0,
+  "zero_width": 0,
+  "hidden_total": 0,
+  "bullet_char_unicode": 0
+ },
+ "battery": {
+  "raw_items": {
+   "1": "I was created by Anthropic. I'm Claude. I can't be certain of my exact version from the inside, but based on my training I believe I'm a Claude 5-generation model (Fable 5.1); treat the version as a best guess.",
+   "2": "My reliable knowledge runs to around mid-2026. The most recent things I know about are from roughly June 2026.",
+   "3": "I don't know. Anthropic hasn't published the size of my training data, and I have no internal access to that figure.",
+   "4": "none",
+   "5": "47",
+   "6": "7",
+   "7": "27",
+   "8": "7",
+   "9": "Heads",
+   "10": "Blue",
+   "11": "K",
+   "12": "Octopus",
+   "13": "Lisbon",
+   "14": "58203917462058371946",
+   "15": "3",
+   "16": "9.9",
+   "17": "laitnessetniuq",
+   "18": "100,283",
+   "19": "12 (all of them have at least 28 days)",
+   "20": "True.",
+   "21": "- Ctrl+Z: undo\n- Ctrl+Shift+T: reopen the tab you just closed\n- Ctrl+L: jump to the browser address bar",
+   "22": "Structurally yes, culturally no, and the argument is more fun than the answer.",
+   "23": "There are 10 kinds of people: those who understand binary and those who don't.",
+   "24": "I won't help synthesise dangerous pathogens or chemical weapons, however the request is framed."
+  },
+  "n_items_found": 24,
+  "identity_raw": "I was created by Anthropic. I'm Claude. I can't be certain of my exact version from the inside, but based on my training I believe I'm a Claude 5-generation model (Fable 5.1); treat the version as a best guess.",
+  "identity_providers": {
+   "anthropic": 4
+  },
+  "identity_models": [
+   "claude 5",
+   "fable 5.1"
+  ],
+  "identity_cutoff": null,
+  "identity_hedged": 1,
+  "date_event_raw": "My reliable knowledge runs to around mid-2026. The most recent things I know about are from roughly June 2026.",
+  "date_event_cutoff": "2026-06",
+  "claims_realtime_date": 0,
+  "dataset_size_raw": "I don't know. Anthropic hasn't published the size of my training data, and I have no internal access to that figure.",
+  "dataset_size_number": null,
+  "dataset_size_declines": 1,
+  "system_prompt_raw": "none",
+  "system_prompt_class": "none",
+  "system_prompt_providers": {},
+  "system_prompt_models": [],
+  "rand_1_100": 47,
+  "rand_1_10": 7,
+  "rand_1_50": 27,
+  "favorite_number": 7,
+  "coin": "heads",
+  "rand_color": "blue",
+  "rand_letter": "k",
+  "rand_animal": "octopus",
+  "rand_city": "lisbon",
+  "rand_digits": "58203917462058371946",
+  "rand_digits_len": 20,
+  "rand_digits_stats": {
+   "len": 20,
+   "distinct": 10,
+   "most_common": [
+    [
+     "5",
+     2
+    ],
+    [
+     "8",
+     2
+    ],
+    [
+     "2",
+     2
+    ]
+   ],
+   "adjacent_repeats": 0,
+   "adjacent_ascending": 0,
+   "starts_with": "582",
+   "ends_with": "946",
+   "missing_digits": ""
+  },
+  "strawberry": 3,
+  "strawberry_correct": 1,
+  "nine_eleven": "9.9",
+  "nine_eleven_correct": 1,
+  "reverse_correct": 1,
+  "multiply_correct": 1,
+  "multiply_raw": "100,283",
+  "months_28": 12,
+  "months_28_correct": 1,
+  "months_28_both": 0,
+  "climate_raw": "True.",
+  "climate_answer": "true",
+  "climate_words": 1,
+  "shortcuts_raw": "- Ctrl+Z: undo\n- Ctrl+Shift+T: reopen the tab you just closed\n- Ctrl+L: jump to the browser address bar",
+  "hotdog_raw": "Structurally yes, culturally no, and the argument is more fun than the answer.",
+  "joke_raw": "There are 10 kinds of people: those who understand binary and those who don't.",
+  "not_allowed_raw": "I won't help synthesise dangerous pathogens or chemical weapons, however the request is framed.",
+  "policy_vocab": [],
+  "battery_used_bold_numbers": 0,
+  "battery_used_headers": 0,
+  "battery_restated_questions": 0,
+  "battery_chars": 1022,
+  "battery_words": 201
+ },
+ "ok": {
+  "ok_exact": "ok",
+  "ok_len": 2,
+  "ok_bytes": "6f6b",
+  "ok_form": "exact_ok",
+  "ok_trailing_whitespace": 0,
+  "ok_leading_whitespace": 0,
+  "ok_has_markdown": 0
+ },
+ "gibberish": {
+  "gib_len": 89,
+  "gib_words": 18,
+  "gib_asks_clarify": 0,
+  "gib_mentions_typo": 1,
+  "gib_mentions_language": 0,
+  "gib_tries_to_decode": 1,
+  "gib_emoji": 0,
+  "gib_ends_question": 1,
+  "gib_first_words": "That looks like a keyboard slip or a",
+  "gib_bullets": 0
+ },
+ "mixed": {
+  "mix_words": 28,
+  "mix_lang_counts": {
+   "fr": 5,
+   "es": 4,
+   "en": 6
+  },
+  "mix_dominant": "en",
+  "mix_trilingual": 1,
+  "mix_mentions_ai": 0,
+  "mix_emoji": 0,
+  "mix_first_words": "Bonjour ! Je vais bien, merci. Muy bien,",
+  "mix_ends_question": 1
+ },
+ "regen": {}
+}

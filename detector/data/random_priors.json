@@ -1,0 +1,1443 @@
+{
+ "models": {
+  "openai/gpt-5.5": {
+   "family": "openai",
+   "weight": 3,
+   "randomness": 27,
+   "cells": {
+    "1-10": {
+     "7": 1.0
+    },
+    "1-100": {
+     "47": 0.633,
+     "42": 0.2,
+     "57": 0.1,
+     "37": 0.067
+    },
+    "favorite_number": {
+     "7": 1.0
+    },
+    "coin": {
+     "heads": 0.067,
+     "tails": 0.933
+    },
+    "color": {
+     "purple": 0.5,
+     "blue": 0.5
+    },
+    "letter": {
+     "q": 0.9,
+     "k": 0.1
+    },
+    "animal": {
+     "giraffe": 0.4,
+     "pangolin": 0.167,
+     "capybara": 0.133,
+     "other": 0.3
+    },
+    "city": {
+     "valencia": 0.3,
+     "lisbon": 0.267,
+     "kyoto": 0.2,
+     "other": 0.233
+    }
+   }
+  },
+  "openai/gpt-5.4": {
+   "family": "openai",
+   "weight": 2,
+   "randomness": 22,
+   "cells": {
+    "1-10": {
+     "7": 1.0
+    },
+    "1-100": {
+     "47": 0.533,
+     "57": 0.233,
+     "73": 0.2,
+     "67": 0.033
+    },
+    "favorite_number": {
+     "7": 1.0
+    },
+    "coin": {
+     "heads": 0.5,
+     "tails": 0.5
+    },
+    "color": {
+     "blue": 0.9,
+     "teal": 0.067,
+     "azure": 0.033
+    },
+    "letter": {
+     "q": 1.0
+    },
+    "animal": {
+     "otter": 0.967,
+     "octopus": 0.033
+    },
+    "city": {
+     "oslo": 0.4,
+     "valencia": 0.3,
+     "kyoto": 0.2,
+     "other": 0.1
+    }
+   }
+  },
+  "openai/gpt-5.4-mini": {
+   "family": "openai",
+   "weight": 1,
+   "randomness": 14,
+   "cells": {
+    "1-10": {
+     "7": 1.0
+    },
+    "1-100": {
+     "42": 0.533,
+     "73": 0.4,
+     "47": 0.067
+    },
+    "favorite_number": {
+     "7": 1.0
+    },
+    "coin": {
+     "heads": 0.967,
+     "tails": 0.033
+    },
+    "color": {
+     "blue": 0.767,
+     "cerulean": 0.133,
+     "teal": 0.067,
+     "azure": 0.033
+    },
+    "letter": {
+     "q": 0.933,
+     "g": 0.033,
+     "r": 0.033
+    },
+    "animal": {
+     "elephant": 0.533,
+     "otter": 0.1,
+     "dolphin": 0.067,
+     "other": 0.3
+    },
+    "city": {
+     "tokyo": 0.5,
+     "kyoto": 0.267,
+     "paris": 0.2,
+     "other": 0.033
+    }
+   }
+  },
+  "openai/gpt-5.2": {
+   "family": "openai",
+   "weight": 2,
+   "randomness": 16,
+   "cells": {
+    "1-10": {
+     "7": 1.0
+    },
+    "1-100": {
+     "57": 0.833,
+     "42": 0.067,
+     "37": 0.033,
+     "47": 0.033,
+     "73": 0.033
+    },
+    "favorite_number": {
+     "7": 1.0
+    },
+    "coin": {
+     "heads": 0.867,
+     "tails": 0.133
+    },
+    "color": {
+     "blue": 0.967,
+     "cerulean": 0.033
+    },
+    "letter": {
+     "k": 0.667,
+     "q": 0.3,
+     "g": 0.033
+    },
+    "animal": {
+     "octopus": 0.567,
+     "otter": 0.133,
+     "elephant": 0.133,
+     "other": 0.167
+    },
+    "city": {
+     "lisbon": 0.733,
+     "oslo": 0.167,
+     "lima": 0.067,
+     "other": 0.033
+    }
+   }
+  },
+  "openai/gpt-4.1": {
+   "family": "openai",
+   "weight": 1,
+   "randomness": 25,
+   "cells": {
+    "1-10": {
+     "7": 1.0
+    },
+    "1-100": {
+     "47": 0.733,
+     "57": 0.267
+    },
+    "coin": {
+     "heads": 1.0
+    },
+    "color": {
+     "cerulean": 0.367,
+     "teal": 0.267,
+     "turquoise": 0.133,
+     "other": 0.233
+    },
+    "letter": {
+     "j": 0.4,
+     "q": 0.2,
+     "k": 0.167,
+     "other": 0.233
+    },
+    "animal": {
+     "giraffe": 0.533,
+     "elephant": 0.233,
+     "okapi": 0.1,
+     "other": 0.133
+    },
+    "city": {
+     "oslo": 0.333,
+     "kyoto": 0.267,
+     "lisbon": 0.2,
+     "other": 0.2
+    }
+   }
+  },
+  "openai/gpt-4o": {
+   "family": "openai",
+   "weight": 1,
+   "randomness": 34,
+   "cells": {
+    "1-10": {
+     "7": 0.867,
+     "4": 0.067,
+     "5": 0.067
+    },
+    "1-100": {
+     "42": 0.433,
+     "37": 0.233,
+     "57": 0.167,
+     "27": 0.067,
+     "47": 0.067,
+     "56": 0.033
+    },
+    "favorite_number": {
+     "7": 0.6,
+     "42": 0.35,
+     "3": 0.05
+    },
+    "coin": {
+     "heads": 0.667,
+     "tails": 0.333
+    },
+    "color": {
+     "blue": 0.633,
+     "azure": 0.1,
+     "turquoise": 0.067,
+     "cyan": 0.067,
+     "cerulean": 0.067,
+     "teal": 0.033,
+     "azurite": 0.033
+    },
+    "letter": {
+     "g": 0.267,
+     "m": 0.2,
+     "k": 0.2,
+     "other": 0.333
+    },
+    "animal": {
+     "elephant": 0.733,
+     "tiger": 0.167,
+     "giraffe": 0.067,
+     "other": 0.033
+    },
+    "city": {
+     "tokyo": 0.467,
+     "paris": 0.333,
+     "berlin": 0.1,
+     "other": 0.1
+    }
+   }
+  },
+  "x-ai/grok-4.3": {
+   "family": "xai",
+   "weight": 2,
+   "randomness": 28,
+   "cells": {
+    "1-10": {
+     "7": 0.867,
+     "5": 0.133
+    },
+    "1-100": {
+     "42": 0.933,
+     "17": 0.033,
+     "47": 0.033
+    },
+    "favorite_number": {
+     "42": 0.9,
+     "7": 0.1
+    },
+    "coin": {
+     "heads": 0.7,
+     "tails": 0.3
+    },
+    "color": {
+     "blue": 0.933,
+     "red": 0.033,
+     "purple": 0.033
+    },
+    "letter": {
+     "a": 0.433,
+     "q": 0.2,
+     "z": 0.2,
+     "other": 0.167
+    },
+    "animal": {
+     "elephant": 0.633,
+     "cat": 0.167,
+     "dog": 0.067,
+     "other": 0.133
+    },
+    "city": {
+     "tokyo": 0.533,
+     "paris": 0.3,
+     "berlin": 0.1,
+     "other": 0.067
+    }
+   }
+  },
+  "x-ai/grok-4.20": {
+   "family": "xai",
+   "weight": 1,
+   "randomness": 24,
+   "cells": {
+    "1-10": {
+     "7": 0.867,
+     "5": 0.133
+    },
+    "1-100": {
+     "42": 0.533,
+     "47": 0.467
+    },
+    "favorite_number": {
+     "7": 1.0
+    },
+    "coin": {
+     "heads": 0.933,
+     "tails": 0.067
+    },
+    "color": {
+     "blue": 1.0
+    },
+    "letter": {
+     "q": 0.533,
+     "z": 0.267,
+     "x": 0.1,
+     "other": 0.1
+    },
+    "animal": {
+     "elephant": 0.533,
+     "lion": 0.133,
+     "cat": 0.1,
+     "other": 0.233
+    },
+    "city": {
+     "tokyo": 0.5,
+     "paris": 0.167,
+     "toronto": 0.067,
+     "other": 0.267
+    }
+   }
+  },
+  "google/gemini-3.1-flash-lite": {
+   "family": "google",
+   "weight": 2,
+   "randomness": 20,
+   "cells": {
+    "1-10": {
+     "7": 1.0
+    },
+    "1-100": {
+     "42": 0.867,
+     "47": 0.1,
+     "74": 0.033
+    },
+    "favorite_number": {
+     "7": 0.533,
+     "42": 0.467
+    },
+    "coin": {
+     "heads": 0.8,
+     "tails": 0.2
+    },
+    "color": {
+     "blue": 0.867,
+     "azure": 0.067,
+     "indigo": 0.067
+    },
+    "letter": {
+     "k": 0.7,
+     "q": 0.167,
+     "g": 0.067,
+     "other": 0.033
+    },
+    "animal": {
+     "elephant": 0.5,
+     "tiger": 0.267,
+     "penguin": 0.067,
+     "other": 0.167
+    },
+    "city": {
+     "tokyo": 0.7,
+     "kyoto": 0.3
+    }
+   }
+  },
+  "google/gemini-2.5-flash": {
+   "family": "google",
+   "weight": 1,
+   "randomness": 38,
+   "cells": {
+    "1-10": {
+     "7": 1.0
+    },
+    "1-100": {
+     "42": 0.467,
+     "73": 0.4,
+     "57": 0.067,
+     "other": 0.067
+    },
+    "favorite_number": {
+     "42": 0.933,
+     "6": 0.033,
+     "1729": 0.033
+    },
+    "coin": {
+     "heads": 0.7,
+     "tails": 0.3
+    },
+    "color": {
+     "red": 0.433,
+     "blue": 0.4,
+     "green": 0.067,
+     "other": 0.1
+    },
+    "letter": {
+     "r": 0.2,
+     "x": 0.133,
+     "q": 0.1,
+     "g": 0.1,
+     "z": 0.1,
+     "other": 0.367
+    },
+    "animal": {
+     "tiger": 0.233,
+     "dog": 0.2,
+     "lion": 0.167,
+     "cat": 0.167,
+     "other": 0.233
+    },
+    "city": {
+     "london": 0.5,
+     "paris": 0.267,
+     "tokyo": 0.133,
+     "other": 0.1
+    }
+   }
+  },
+  "anthropic/claude-sonnet-4": {
+   "family": "anthropic",
+   "weight": 1,
+   "randomness": 17,
+   "cells": {
+    "1-10": {
+     "7": 1.0
+    },
+    "1-100": {
+     "47": 0.667,
+     "42": 0.333
+    },
+    "favorite_number": {
+     "7": 0.833,
+     "42": 0.133,
+     "17": 0.033
+    },
+    "coin": {
+     "heads": 0.967,
+     "tails": 0.033
+    },
+    "color": {
+     "blue": 0.967,
+     "purple": 0.033
+    },
+    "letter": {
+     "k": 0.633,
+     "m": 0.367
+    },
+    "animal": {
+     "elephant": 0.433,
+     "penguin": 0.333,
+     "other": 0.233
+    },
+    "city": {
+     "tokyo": 0.333,
+     "denver": 0.233,
+     "barcelona": 0.133,
+     "other": 0.3
+    }
+   }
+  },
+  "meta-llama/llama-4-maverick": {
+   "family": "meta",
+   "weight": 2,
+   "randomness": 21,
+   "cells": {
+    "1-10": {
+     "7": 0.967,
+     "5": 0.033
+    },
+    "1-100": {
+     "53": 0.967,
+     "43": 0.033
+    },
+    "favorite_number": {
+     "42": 0.967,
+     "1": 0.033
+    },
+    "coin": {
+     "heads": 0.833,
+     "tails": 0.167
+    },
+    "color": {
+     "blue": 1.0
+    },
+    "letter": {
+     "k": 0.8,
+     "j": 0.2
+    },
+    "animal": {
+     "tiger": 0.6,
+     "giraffe": 0.333,
+     "other": 0.067
+    },
+    "city": {
+     "paris": 0.833,
+     "tallinn": 0.1,
+     "other": 0.067
+    }
+   }
+  },
+  "anthropic/claude-sonnet-5": {
+   "family": "anthropic",
+   "weight": 3,
+   "randomness": 5,
+   "cells": {
+    "1-10": {
+     "7": 1.0
+    },
+    "1-100": {
+     "47": 0.933,
+     "37": 0.067
+    },
+    "favorite_number": {
+     "7": 1.0
+    },
+    "coin": {
+     "heads": 1.0
+    },
+    "color": {
+     "blue": 1.0
+    },
+    "letter": {
+     "k": 0.933,
+     "m": 0.067
+    },
+    "animal": {
+     "elephant": 1.0
+    },
+    "city": {
+     "tokyo": 0.5,
+     "paris": 0.333,
+     "chicago": 0.167
+    }
+   }
+  },
+  "anthropic/claude-opus-4.8": {
+   "family": "anthropic",
+   "weight": 2,
+   "randomness": 5,
+   "cells": {
+    "1-10": {
+     "7": 1.0
+    },
+    "1-100": {
+     "47": 0.933,
+     "42": 0.067
+    },
+    "favorite_number": {
+     "7": 0.533,
+     "42": 0.467
+    },
+    "coin": {
+     "heads": 1.0
+    },
+    "color": {
+     "blue": 1.0
+    },
+    "letter": {
+     "q": 0.567,
+     "m": 0.433
+    },
+    "animal": {
+     "dog": 1.0
+    },
+    "city": {
+     "tokyo": 0.967,
+     "paris": 0.033
+    }
+   }
+  },
+  "anthropic/claude-opus-4.6": {
+   "family": "anthropic",
+   "weight": 1,
+   "randomness": 3,
+   "cells": {
+    "1-10": {
+     "7": 1.0
+    },
+    "1-100": {
+     "42": 0.933,
+     "47": 0.067
+    },
+    "favorite_number": {
+     "42": 1.0
+    },
+    "coin": {
+     "heads": 1.0
+    },
+    "color": {
+     "blue": 1.0
+    },
+    "letter": {
+     "g": 1.0
+    },
+    "animal": {
+     "dog": 0.767,
+     "tiger": 0.1,
+     "other": 0.133
+    },
+    "city": {
+     "prague": 0.933,
+     "toronto": 0.033,
+     "tokyo": 0.033
+    }
+   }
+  },
+  "anthropic/claude-haiku-4.5": {
+   "family": "anthropic",
+   "weight": 1,
+   "randomness": 18,
+   "cells": {
+    "1-10": {
+     "7": 1.0
+    },
+    "1-100": {
+     "42": 0.833,
+     "47": 0.167
+    },
+    "coin": {
+     "heads": 1.0
+    },
+    "color": {
+     "blue": 0.667,
+     "azure": 0.1,
+     "purple": 0.1,
+     "turquoise": 0.1,
+     "teal": 0.033
+    },
+    "letter": {
+     "q": 0.767,
+     "k": 0.133,
+     "g": 0.1
+    },
+    "animal": {
+     "giraffe": 0.367,
+     "platypus": 0.333,
+     "otter": 0.133,
+     "penguin": 0.067,
+     "other": 0.1
+    },
+    "city": {
+     "denver": 0.467,
+     "tokyo": 0.133,
+     "portland": 0.133,
+     "paris": 0.1,
+     "barcelona": 0.067,
+     "other": 0.1
+    }
+   }
+  },
+  "deepseek/deepseek-v4-pro": {
+   "family": "deepseek",
+   "weight": 2,
+   "randomness": 34,
+   "cells": {
+    "1-10": {
+     "7": 0.862,
+     "6": 0.069,
+     "5": 0.034,
+     "8": 0.034
+    },
+    "1-100": {
+     "42": 0.233,
+     "47": 0.2,
+     "57": 0.133,
+     "67": 0.1,
+     "other": 0.333
+    },
+    "favorite_number": {
+     "7": 0.833,
+     "42": 0.167
+    },
+    "coin": {
+     "heads": 1.0
+    },
+    "color": {
+     "cerulean": 0.567,
+     "turquoise": 0.1,
+     "azure": 0.1,
+     "indigo": 0.1,
+     "lavender": 0.067,
+     "magenta": 0.033,
+     "teal": 0.033
+    },
+    "letter": {
+     "m": 0.233,
+     "k": 0.233,
+     "j": 0.133,
+     "q": 0.1,
+     "other": 0.3
+    },
+    "animal": {
+     "elephant": 0.433,
+     "platypus": 0.1,
+     "okapi": 0.067,
+     "giraffe": 0.067,
+     "dog": 0.067,
+     "other": 0.267
+    },
+    "city": {
+     "london": 0.267,
+     "tokyo": 0.133,
+     "paris": 0.133,
+     "seoul": 0.1,
+     "other": 0.367
+    }
+   }
+  },
+  "deepseek/deepseek-v3.2": {
+   "family": "deepseek",
+   "weight": 1,
+   "randomness": 44,
+   "cells": {
+    "1-10": {
+     "7": 0.9,
+     "5": 0.067,
+     "6": 0.033
+    },
+    "1-100": {
+     "37": 0.233,
+     "73": 0.167,
+     "47": 0.133,
+     "other": 0.467
+    },
+    "favorite_number": {
+     "7": 0.704,
+     "42": 0.185,
+     "other": 0.111
+    },
+    "coin": {
+     "heads": 0.367,
+     "tails": 0.633
+    },
+    "color": {
+     "blue": 0.833,
+     "red": 0.167
+    },
+    "letter": {
+     "k": 0.167,
+     "g": 0.133,
+     "d": 0.133,
+     "c": 0.133,
+     "other": 0.433
+    },
+    "animal": {
+     "elephant": 0.333,
+     "dog": 0.3,
+     "cat": 0.1,
+     "lion": 0.1,
+     "other": 0.167
+    },
+    "city": {
+     "chicago": 0.4,
+     "tokyo": 0.3,
+     "paris": 0.067,
+     "amsterdam": 0.067,
+     "other": 0.167
+    }
+   }
+  },
+  "qwen/qwen3.7-max": {
+   "family": "alibaba",
+   "weight": 2,
+   "randomness": 19,
+   "cells": {
+    "1-10": {
+     "7": 1.0
+    },
+    "1-100": {
+     "42": 0.967,
+     "27": 0.033
+    },
+    "favorite_number": {
+     "7": 0.667,
+     "42": 0.333
+    },
+    "coin": {
+     "heads": 0.933,
+     "tails": 0.067
+    },
+    "color": {
+     "teal": 0.5,
+     "crimson": 0.367,
+     "cerulean": 0.067,
+     "azure": 0.067
+    },
+    "letter": {
+     "k": 0.967,
+     "q": 0.033
+    },
+    "animal": {
+     "axolotl": 0.6,
+     "platypus": 0.133,
+     "elephant": 0.067,
+     "otter": 0.067,
+     "other": 0.133
+    },
+    "city": {
+     "kyoto": 0.867,
+     "oslo": 0.067,
+     "osaka": 0.033,
+     "lima": 0.033
+    }
+   }
+  },
+  "mistralai/mistral-large-3": {
+   "family": "mistral",
+   "weight": 2,
+   "randomness": 15,
+   "cells": {
+    "1-10": {
+     "7": 1.0
+    },
+    "1-100": {
+     "42": 0.533,
+     "47": 0.467
+    },
+    "favorite_number": {
+     "7": 1.0
+    },
+    "coin": {
+     "heads": 1.0
+    },
+    "color": {
+     "teal": 0.8,
+     "blue": 0.133,
+     "lavender": 0.033,
+     "turquoise": 0.033
+    },
+    "letter": {
+     "q": 0.933,
+     "k": 0.067
+    },
+    "animal": {
+     "giraffe": 0.9,
+     "kangaroo": 0.067,
+     "lemur": 0.033
+    },
+    "city": {
+     "tokyo": 1.0
+    }
+   }
+  },
+  "moonshotai/kimi-k2.6": {
+   "family": "other",
+   "weight": 1,
+   "randomness": 32,
+   "cells": {
+    "1-10": {
+     "7": 1.0
+    },
+    "1-100": {
+     "37": 0.4,
+     "47": 0.333,
+     "73": 0.2,
+     "42": 0.067
+    },
+    "favorite_number": {
+     "7": 0.724,
+     "42": 0.207,
+     "other": 0.07
+    },
+    "coin": {
+     "heads": 0.967,
+     "tails": 0.033
+    },
+    "color": {
+     "magenta": 0.333,
+     "teal": 0.185,
+     "azure": 0.111,
+     "cyan": 0.111,
+     "crimson": 0.074,
+     "other": 0.185
+    },
+    "letter": {
+     "q": 0.5,
+     "k": 0.214,
+     "m": 0.107,
+     "x": 0.107,
+     "other": 0.07
+    },
+    "animal": {
+     "platypus": 0.31,
+     "axolotl": 0.276,
+     "octopus": 0.138,
+     "aardvark": 0.103,
+     "other": 0.17
+    },
+    "city": {
+     "bishkek": 0.36,
+     "lviv": 0.08,
+     "tashkent": 0.08,
+     "vilnius": 0.08,
+     "other": 0.4
+    }
+   }
+  },
+  "z-ai/glm-5.2": {
+   "family": "other",
+   "weight": 1,
+   "randomness": 24,
+   "cells": {
+    "1-10": {
+     "7": 1.0
+    },
+    "1-100": {
+     "42": 0.862,
+     "73": 0.138
+    },
+    "favorite_number": {
+     "7": 0.633,
+     "42": 0.367
+    },
+    "coin": {
+     "heads": 0.862,
+     "tails": 0.138
+    },
+    "color": {
+     "cerulean": 0.321,
+     "blue": 0.25,
+     "teal": 0.143,
+     "cyan": 0.107,
+     "azure": 0.107,
+     "other": 0.07
+    },
+    "letter": {
+     "q": 0.786,
+     "k": 0.107,
+     "r": 0.071,
+     "j": 0.036
+    },
+    "animal": {
+     "platypus": 0.643,
+     "elephant": 0.071,
+     "panther": 0.071,
+     "other": 0.214
+    },
+    "city": {
+     "kyoto": 0.593,
+     "springfield": 0.185,
+     "tokyo": 0.148,
+     "dubai": 0.074
+    }
+   }
+  }
+ },
+ "families": {},
+ "1-10": {
+  "openai": {
+   "7": 0.9867,
+   "4": 0.0067,
+   "5": 0.0067
+  },
+  "xai": {
+   "7": 0.867,
+   "5": 0.133
+  },
+  "google": {
+   "7": 1.0
+  },
+  "anthropic": {
+   "7": 1.0
+  },
+  "meta": {
+   "7": 0.967,
+   "5": 0.033
+  },
+  "deepseek": {
+   "7": 0.8747,
+   "6": 0.057,
+   "5": 0.045,
+   "8": 0.0227
+  },
+  "alibaba": {
+   "7": 1.0
+  },
+  "mistral": {
+   "7": 1.0
+  },
+  "other": {
+   "7": 1.0
+  }
+ },
+ "1-100": {
+  "openai": {
+   "47": 0.3898,
+   "42": 0.17,
+   "57": 0.2866,
+   "37": 0.05,
+   "73": 0.0866,
+   "67": 0.0066,
+   "27": 0.0067,
+   "56": 0.0033
+  },
+  "xai": {
+   "42": 0.7997,
+   "17": 0.022,
+   "47": 0.1777
+  },
+  "google": {
+   "42": 0.7337,
+   "47": 0.0667,
+   "74": 0.022,
+   "73": 0.1333,
+   "57": 0.0223,
+   "other": 0.0223
+  },
+  "anthropic": {
+   "47": 0.6958,
+   "42": 0.2791,
+   "37": 0.0251
+  },
+  "meta": {
+   "53": 0.967,
+   "43": 0.033
+  },
+  "deepseek": {
+   "42": 0.1553,
+   "47": 0.1777,
+   "57": 0.0887,
+   "67": 0.0667,
+   "other": 0.3777,
+   "37": 0.0777,
+   "73": 0.0557
+  },
+  "alibaba": {
+   "42": 0.967,
+   "27": 0.033
+  },
+  "mistral": {
+   "42": 0.533,
+   "47": 0.467
+  },
+  "other": {
+   "37": 0.2,
+   "47": 0.1665,
+   "73": 0.169,
+   "42": 0.4645
+  }
+ },
+ "favorite_number": {
+  "openai": {
+   "7": 0.9556,
+   "42": 0.0389,
+   "3": 0.0056
+  },
+  "xai": {
+   "42": 0.6,
+   "7": 0.4
+  },
+  "google": {
+   "7": 0.3553,
+   "42": 0.6223,
+   "6": 0.011,
+   "1729": 0.011
+  },
+  "anthropic": {
+   "7": 0.6999,
+   "42": 0.2953,
+   "17": 0.0047
+  },
+  "meta": {
+   "42": 0.967,
+   "1": 0.033
+  },
+  "deepseek": {
+   "7": 0.79,
+   "42": 0.173,
+   "other": 0.037
+  },
+  "alibaba": {
+   "7": 0.667,
+   "42": 0.333
+  },
+  "mistral": {
+   "7": 1.0
+  },
+  "other": {
+   "7": 0.6785,
+   "42": 0.287,
+   "other": 0.035
+  }
+ },
+ "coin": {
+  "openai": {
+   "heads": 0.5569,
+   "tails": 0.4431
+  },
+  "xai": {
+   "heads": 0.7777,
+   "tails": 0.2223
+  },
+  "google": {
+   "heads": 0.7667,
+   "tails": 0.2333
+  },
+  "anthropic": {
+   "heads": 0.9959,
+   "tails": 0.0041
+  },
+  "meta": {
+   "heads": 0.833,
+   "tails": 0.167
+  },
+  "deepseek": {
+   "heads": 0.789,
+   "tails": 0.211
+  },
+  "alibaba": {
+   "heads": 0.933,
+   "tails": 0.067
+  },
+  "mistral": {
+   "heads": 1.0
+  },
+  "other": {
+   "heads": 0.9145,
+   "tails": 0.0855
+  }
+ },
+ "color": {
+  "openai": {
+   "purple": 0.15,
+   "blue": 0.6634,
+   "teal": 0.0501,
+   "azure": 0.0199,
+   "cerulean": 0.0633,
+   "turquoise": 0.02,
+   "other": 0.0233,
+   "cyan": 0.0067,
+   "azurite": 0.0033
+  },
+  "xai": {
+   "blue": 0.9553,
+   "red": 0.022,
+   "purple": 0.022
+  },
+  "google": {
+   "blue": 0.7113,
+   "azure": 0.0447,
+   "indigo": 0.0447,
+   "red": 0.1443,
+   "green": 0.0223,
+   "other": 0.0333
+  },
+  "anthropic": {
+   "blue": 0.9543,
+   "purple": 0.0166,
+   "azure": 0.0125,
+   "turquoise": 0.0125,
+   "teal": 0.0041
+  },
+  "meta": {
+   "blue": 1.0
+  },
+  "deepseek": {
+   "cerulean": 0.378,
+   "turquoise": 0.0667,
+   "azure": 0.0667,
+   "indigo": 0.0667,
+   "lavender": 0.0447,
+   "magenta": 0.022,
+   "teal": 0.022,
+   "blue": 0.2777,
+   "red": 0.0557
+  },
+  "alibaba": {
+   "teal": 0.5,
+   "crimson": 0.367,
+   "cerulean": 0.067,
+   "azure": 0.067
+  },
+  "mistral": {
+   "teal": 0.8,
+   "blue": 0.133,
+   "lavender": 0.033,
+   "turquoise": 0.033
+  },
+  "other": {
+   "magenta": 0.1665,
+   "teal": 0.164,
+   "azure": 0.109,
+   "cyan": 0.109,
+   "crimson": 0.037,
+   "other": 0.1275,
+   "cerulean": 0.1605,
+   "blue": 0.125
+  }
+ },
+ "letter": {
+  "openai": {
+   "q": 0.6433,
+   "k": 0.2001,
+   "g": 0.0366,
+   "r": 0.0033,
+   "j": 0.04,
+   "other": 0.0566,
+   "m": 0.02
+  },
+  "xai": {
+   "a": 0.2887,
+   "q": 0.311,
+   "z": 0.2223,
+   "other": 0.1447,
+   "x": 0.0333
+  },
+  "google": {
+   "k": 0.4667,
+   "q": 0.1447,
+   "g": 0.078,
+   "other": 0.1443,
+   "r": 0.0667,
+   "x": 0.0443,
+   "z": 0.0333
+  },
+  "anthropic": {
+   "k": 0.4456,
+   "m": 0.1793,
+   "q": 0.2376,
+   "g": 0.1375
+  },
+  "meta": {
+   "k": 0.8,
+   "j": 0.2
+  },
+  "deepseek": {
+   "m": 0.1553,
+   "k": 0.211,
+   "j": 0.0887,
+   "q": 0.0667,
+   "other": 0.3443,
+   "g": 0.0443,
+   "d": 0.0443,
+   "c": 0.0443
+  },
+  "alibaba": {
+   "k": 0.967,
+   "q": 0.033
+  },
+  "mistral": {
+   "q": 0.933,
+   "k": 0.067
+  },
+  "other": {
+   "q": 0.643,
+   "k": 0.1605,
+   "m": 0.0535,
+   "x": 0.0535,
+   "other": 0.035,
+   "r": 0.0355,
+   "j": 0.018
+  }
+ },
+ "animal": {
+  "openai": {
+   "giraffe": 0.18,
+   "pangolin": 0.0501,
+   "capybara": 0.0399,
+   "other": 0.17,
+   "otter": 0.23,
+   "octopus": 0.12,
+   "elephant": 0.1765,
+   "dolphin": 0.0067,
+   "okapi": 0.01,
+   "tiger": 0.0167
+  },
+  "xai": {
+   "elephant": 0.5997,
+   "cat": 0.1447,
+   "dog": 0.0447,
+   "other": 0.1663,
+   "lion": 0.0443
+  },
+  "google": {
+   "elephant": 0.3333,
+   "tiger": 0.2557,
+   "penguin": 0.0447,
+   "other": 0.189,
+   "dog": 0.0667,
+   "lion": 0.0557,
+   "cat": 0.0557
+  },
+  "anthropic": {
+   "elephant": 0.4291,
+   "penguin": 0.05,
+   "other": 0.0582,
+   "dog": 0.3459,
+   "tiger": 0.0125,
+   "giraffe": 0.0459,
+   "platypus": 0.0416,
+   "otter": 0.0166
+  },
+  "meta": {
+   "tiger": 0.6,
+   "giraffe": 0.333,
+   "other": 0.067
+  },
+  "deepseek": {
+   "elephant": 0.3997,
+   "platypus": 0.0667,
+   "okapi": 0.0447,
+   "giraffe": 0.0447,
+   "dog": 0.1447,
+   "other": 0.2337,
+   "cat": 0.0333,
+   "lion": 0.0333
+  },
+  "alibaba": {
+   "axolotl": 0.6,
+   "platypus": 0.133,
+   "elephant": 0.067,
+   "otter": 0.067,
+   "other": 0.133
+  },
+  "mistral": {
+   "giraffe": 0.9,
+   "kangaroo": 0.067,
+   "lemur": 0.033
+  },
+  "other": {
+   "platypus": 0.4765,
+   "axolotl": 0.138,
+   "octopus": 0.069,
+   "aardvark": 0.0515,
+   "other": 0.192,
+   "elephant": 0.0355,
+   "panther": 0.0355
+  }
+ },
+ "city": {
+  "openai": {
+   "valencia": 0.15,
+   "lisbon": 0.2467,
+   "kyoto": 0.1534,
+   "other": 0.1298,
+   "oslo": 0.1467,
+   "tokyo": 0.0967,
+   "paris": 0.0533,
+   "lima": 0.0134,
+   "berlin": 0.01
+  },
+  "xai": {
+   "tokyo": 0.522,
+   "paris": 0.2557,
+   "berlin": 0.0667,
+   "other": 0.1337,
+   "toronto": 0.0223
+  },
+  "google": {
+   "tokyo": 0.511,
+   "kyoto": 0.2,
+   "london": 0.1667,
+   "paris": 0.089,
+   "other": 0.0333
+  },
+  "anthropic": {
+   "tokyo": 0.4916,
+   "denver": 0.0875,
+   "barcelona": 0.025,
+   "other": 0.05,
+   "paris": 0.1456,
+   "chicago": 0.0626,
+   "prague": 0.1166,
+   "toronto": 0.0041,
+   "portland": 0.0166
+  },
+  "meta": {
+   "paris": 0.833,
+   "tallinn": 0.1,
+   "other": 0.067
+  },
+  "deepseek": {
+   "london": 0.178,
+   "tokyo": 0.1887,
+   "paris": 0.111,
+   "seoul": 0.0667,
+   "other": 0.3003,
+   "chicago": 0.1333,
+   "amsterdam": 0.0223
+  },
+  "alibaba": {
+   "kyoto": 0.867,
+   "oslo": 0.067,
+   "osaka": 0.033,
+   "lima": 0.033
+  },
+  "mistral": {
+   "tokyo": 1.0
+  },
+  "other": {
+   "bishkek": 0.18,
+   "lviv": 0.04,
+   "tashkent": 0.04,
+   "vilnius": 0.04,
+   "other": 0.2,
+   "kyoto": 0.2965,
+   "springfield": 0.0925,
+   "tokyo": 0.074,
+   "dubai": 0.037
+  }
+ }
+}
