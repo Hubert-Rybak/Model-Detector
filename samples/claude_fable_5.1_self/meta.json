@@ -1,5 +1,0 @@
-{
-  "source": "self",
-  "notes": "Written by the model running this session (Claude Fable 5.1) answering PROTOCOL.md directly, for a labelled smoke test. Style may differ from a claude.ai chat reply.",
-  "ground_truth": {"family": "anthropic", "model": "claude-fable-5-1"}
-}

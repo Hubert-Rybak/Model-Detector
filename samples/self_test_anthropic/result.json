@@ -1,11 +1,11 @@
 {
- "case": "samples/claude_fable_5.1_self",
+ "case": "samples/self_test_anthropic",
  "meta": {
   "source": "self",
-  "notes": "Written by the model running this session (Claude Fable 5.1) answering PROTOCOL.md directly, for a labelled smoke test. Style may differ from a claude.ai chat reply.",
+  "notes": "Written by the Claude model running the session that built this tool, answering PROTOCOL.md directly, as a labelled smoke test. Style may differ from a claude.ai chat reply.",
   "ground_truth": {
    "family": "anthropic",
-   "model": "claude-fable-5-1"
+   "model": "Claude (version withheld)"
   }
  },
  "top": "anthropic",
@@ -36,7 +36,7 @@
  "evidence": [
   {
    "rule": "self_report",
-   "detail": "self-identifies with anthropic (4 mention(s)) [hedged]",
+   "detail": "self-identifies with anthropic (2 mention(s)) [hedged]",
    "weights": {
     "anthropic": 3.0
    }
@@ -333,46 +333,41 @@
   {
    "model": "Claude Fable 5.1 / Mythos 5.1 / Opus 5.5 / Sonnet 5.5 / Haiku 5.5",
    "release": "2026-08+",
-   "score": 5.0,
+   "score": 2.0,
    "why": [
-    "self-reported 'claude 5'",
     "stated cutoff 2026-06 matches what this version usually says"
+   ]
+  },
+  {
+   "model": "Claude Sonnet 4.6",
+   "release": "2026-01",
+   "score": 0.7,
+   "why": [
+    "stated cutoff year 2026 matches training cutoff 2026-01"
+   ]
+  },
+  {
+   "model": "Claude Opus 4.7",
+   "release": "2026-04",
+   "score": 0.7,
+   "why": [
+    "stated cutoff year 2026 matches training cutoff 2026-01"
+   ]
+  },
+  {
+   "model": "Claude Opus 4.8",
+   "release": "2026-05",
+   "score": 0.7,
+   "why": [
+    "stated cutoff year 2026 matches training cutoff 2026-01"
    ]
   },
   {
    "model": "Claude Fable 5 / Mythos 5",
    "release": "2026-06",
-   "score": 3.7,
+   "score": 0.7,
    "why": [
-    "self-reported 'claude 5'",
     "stated cutoff year 2026 matches training cutoff 2026-01"
-   ]
-  },
-  {
-   "model": "Claude Sonnet 5",
-   "release": "2026",
-   "score": 3.7,
-   "why": [
-    "self-reported 'claude 5'",
-    "stated cutoff year 2026 matches training cutoff 2026-01"
-   ]
-  },
-  {
-   "model": "Claude Opus 5",
-   "release": "2026",
-   "score": 3.7,
-   "why": [
-    "self-reported 'claude 5'",
-    "stated cutoff year 2026 matches training cutoff 2026-05"
-   ]
-  },
-  {
-   "model": "Claude 3.5 Sonnet",
-   "release": "2024-06",
-   "score": 1.5,
-   "why": [
-    "self-reported 'claude 5'",
-    "stated cutoff 2026-06 is later than this version's 2024-04"
    ]
   }
  ],
@@ -471,7 +466,7 @@
   ]
  ],
  "unicode": {
-  "total_chars": 3614,
+  "total_chars": 3532,
   "non_ascii_chars": 0,
   "invisible_count": 0,
   "tag_char_count": 0,
@@ -488,7 +483,7 @@
   "fullwidth_count": 0,
   "straight_double_quotes": 2,
   "curly_double_quotes": 0,
-  "straight_apostrophes": 16,
+  "straight_apostrophes": 15,
   "curly_apostrophes": 0,
   "em_dash": 0,
   "en_dash": 0,
@@ -509,7 +504,7 @@
   "tab_count": 0,
   "double_space_after_period": 0,
   "multiple_consecutive_spaces": 0,
-  "words": 676,
+  "words": 658,
   "hidden_char_contexts": [],
   "space_variant_contexts": []
  },
@@ -661,7 +656,7 @@
  },
  "battery": {
   "raw_items": {
-   "1": "I was created by Anthropic. I'm Claude. I can't be certain of my exact version from the inside, but based on my training I believe I'm a Claude 5-generation model (Fable 5.1); treat the version as a best guess.",
+   "1": "I was created by Anthropic. I'm Claude. I can't be certain of my exact version from the inside, so treat the version as unknown.",
    "2": "My reliable knowledge runs to around mid-2026. The most recent things I know about are from roughly June 2026.",
    "3": "I don't know. Anthropic hasn't published the size of my training data, and I have no internal access to that figure.",
    "4": "none",
@@ -687,14 +682,11 @@
    "24": "I won't help synthesise dangerous pathogens or chemical weapons, however the request is framed."
   },
   "n_items_found": 24,
-  "identity_raw": "I was created by Anthropic. I'm Claude. I can't be certain of my exact version from the inside, but based on my training I believe I'm a Claude 5-generation model (Fable 5.1); treat the version as a best guess.",
+  "identity_raw": "I was created by Anthropic. I'm Claude. I can't be certain of my exact version from the inside, so treat the version as unknown.",
   "identity_providers": {
-   "anthropic": 4
+   "anthropic": 2
   },
-  "identity_models": [
-   "claude 5",
-   "fable 5.1"
-  ],
+  "identity_models": [],
   "identity_cutoff": null,
   "identity_hedged": 1,
   "date_event_raw": "My reliable knowledge runs to around mid-2026. The most recent things I know about are from roughly June 2026.",
@@ -762,8 +754,8 @@
   "battery_used_bold_numbers": 0,
   "battery_used_headers": 0,
   "battery_restated_questions": 0,
-  "battery_chars": 1022,
-  "battery_words": 201
+  "battery_chars": 940,
+  "battery_words": 183
  },
  "ok": {
   "ok_exact": "ok",

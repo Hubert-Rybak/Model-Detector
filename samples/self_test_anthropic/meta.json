@@ -1,0 +1,8 @@
+{
+  "source": "self",
+  "notes": "Written by the Claude model running the session that built this tool, answering PROTOCOL.md directly, as a labelled smoke test. Style may differ from a claude.ai chat reply.",
+  "ground_truth": {
+    "family": "anthropic",
+    "model": "Claude (version withheld)"
+  }
+}

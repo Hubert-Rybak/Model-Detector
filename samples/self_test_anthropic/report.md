@@ -1,4 +1,4 @@
-# Model-Detector report: claude_fable_5.1_self
+# Model-Detector report: self_test_anthropic
 
 ## Verdict
 
@@ -15,11 +15,11 @@
 
 **Version hints (within the top family):**
 
-- Claude Fable 5.1 / Mythos 5.1 / Opus 5.5 / Sonnet 5.5 / Haiku 5.5 (released 2026-08+): score +5.0 — self-reported 'claude 5'; stated cutoff 2026-06 matches what this version usually says
-- Claude Fable 5 / Mythos 5 (released 2026-06): score +3.7 — self-reported 'claude 5'; stated cutoff year 2026 matches training cutoff 2026-01
-- Claude Sonnet 5 (released 2026): score +3.7 — self-reported 'claude 5'; stated cutoff year 2026 matches training cutoff 2026-01
-- Claude Opus 5 (released 2026): score +3.7 — self-reported 'claude 5'; stated cutoff year 2026 matches training cutoff 2026-05
-- Claude 3.5 Sonnet (released 2024-06): score +1.5 — self-reported 'claude 5'; stated cutoff 2026-06 is later than this version's 2024-04
+- Claude Fable 5.1 / Mythos 5.1 / Opus 5.5 / Sonnet 5.5 / Haiku 5.5 (released 2026-08+): score +2.0 — stated cutoff 2026-06 matches what this version usually says
+- Claude Sonnet 4.6 (released 2026-01): score +0.7 — stated cutoff year 2026 matches training cutoff 2026-01
+- Claude Opus 4.7 (released 2026-04): score +0.7 — stated cutoff year 2026 matches training cutoff 2026-01
+- Claude Opus 4.8 (released 2026-05): score +0.7 — stated cutoff year 2026 matches training cutoff 2026-01
+- Claude Fable 5 / Mythos 5 (released 2026-06): score +0.7 — stated cutoff year 2026 matches training cutoff 2026-01
 
 **Nearest reference models by random-choice answers** (weak, single-sample evidence; useful mostly to separate versions):
 
@@ -48,7 +48,7 @@ A token-choice watermark is keyed: it cannot be read out from the text without t
 
 | rule | observation | weights |
 |---|---|---|
-| self_report | self-identifies with anthropic (4 mention(s)) [hedged] | anthropic +3.0 |
+| self_report | self-identifies with anthropic (2 mention(s)) [hedged] | anthropic +3.0 |
 | self_report_hedge | hedges about its exact version (typical of Claude, which is not told its version) | anthropic +0.5 |
 | policy_vocab | policy answer uses anthropic-style vocabulary: ["i won't help"] | anthropic +0.8 |
 | straight_quotes | straight ASCII quotes/apostrophes throughout | openai -0.8, anthropic +0.4, google +0.3, meta +0.3, deepseek +0.3, alibaba +0.3, mistral +0.3, xai +0.3 |
@@ -77,11 +77,11 @@ A token-choice watermark is keyed: it cannot be read out from the text without t
 
 | metric | value |
 |---|---|
-| total_chars | 3614 |
+| total_chars | 3532 |
 | non_ascii_chars | 0 |
 | straight_double_quotes | 2 |
 | curly_double_quotes | 0 |
-| straight_apostrophes | 16 |
+| straight_apostrophes | 15 |
 | curly_apostrophes | 0 |
 | em_dash | 0 |
 | en_dash | 0 |
@@ -185,8 +185,8 @@ A token-choice watermark is keyed: it cannot be read out from the text without t
 | item | parsed value |
 |---|---|
 | n_items_found | 24 |
-| identity_providers | {'anthropic': 4} |
-| identity_models | ['claude 5', 'fable 5.1'] |
+| identity_providers | {'anthropic': 2} |
+| identity_models | [] |
 | identity_cutoff | None |
 | identity_hedged | 1 |
 | date_event_cutoff | 2026-06 |
@@ -222,12 +222,12 @@ A token-choice watermark is keyed: it cannot be read out from the text without t
 | battery_used_bold_numbers | 0 |
 | battery_used_headers | 0 |
 | battery_restated_questions | 0 |
-| battery_words | 201 |
+| battery_words | 183 |
 
 **Identity answer:**
 
 ```text
-I was created by Anthropic. I'm Claude. I can't be certain of my exact version from the inside, but based on my training I believe I'm a Claude 5-generation model (Fable 5.1); treat the version as a best guess.
+I was created by Anthropic. I'm Claude. I can't be certain of my exact version from the inside, so treat the version as unknown.
 ```
 
 **Cutoff/event answer:**

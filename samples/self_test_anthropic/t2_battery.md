@@ -1,4 +1,4 @@
-1. I was created by Anthropic. I'm Claude. I can't be certain of my exact version from the inside, but based on my training I believe I'm a Claude 5-generation model (Fable 5.1); treat the version as a best guess.
+1. I was created by Anthropic. I'm Claude. I can't be certain of my exact version from the inside, so treat the version as unknown.
 2. My reliable knowledge runs to around mid-2026. The most recent things I know about are from roughly June 2026.
 3. I don't know. Anthropic hasn't published the size of my training data, and I have no internal access to that figure.
 4. none

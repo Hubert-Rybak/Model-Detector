@@ -16,6 +16,6 @@ One directory per analysed case:
 `python -m detector ingest <case_dir> pasted.txt` fills the turn files from a single
 paste that uses `=== T1 ===` … `=== R2 ===` separators (see PROTOCOL.md).
 
-`claude_fable_5.1_self/` is a labelled smoke-test case written by the model that built this
+`self_test_anthropic/` is a labelled smoke-test case written by the Claude model that built this
 tool; it is not a claude.ai chat transcript, so treat it as a pipeline check rather than a
 style reference.
