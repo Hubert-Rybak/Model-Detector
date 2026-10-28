@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Model-Detector</title>
+<meta name="description" content="Paste text and see what it reveals about the language model that wrote it: hidden characters, decoded steganographic payloads, stylometric fingerprint, provider attribution.">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body data-theme="auto">
+<header>
+  <h1>Model-Detector</h1>
+  <p>Paste text from an AI assistant and see what it reveals: hidden or lookalike characters (decoded where a known scheme is used), the stylometric fingerprint, and the most likely provider and model. Everything runs in your browser; nothing is uploaded.</p>
+</header>
+<main>
+  <section class="panel">
+    <h2>Text to examine</h2>
+    <textarea id="input" placeholder="Paste the model's reply here. Use the app's copy button where possible so markdown and invisible characters survive." spellcheck="false"></textarea>
+    <div class="row">
+      <button class="primary" id="analyze">Analyze</button>
+      <button id="example">Load example</button>
+      <button id="clear">Clear</button>
+      <span class="muted" id="status"></span>
+    </div>
+  </section>
+
+  <section id="results" hidden>
+    <div class="grid">
+      <div class="panel">
+        <h2>Verdict</h2>
+        <div id="verdict"></div>
+        <div id="bars" class="bars"></div>
+        <p class="muted" id="verdict-notes"></p>
+        <div id="model-level"></div>
+      </div>
+      <div class="panel">
+        <h2>Hidden and unusual characters</h2>
+        <ul id="findings"></ul>
+        <div id="decoded"></div>
+        <details><summary>Show text with hidden characters made visible</summary><div class="annot" id="annot"></div></details>
+        <details><summary>Non-ASCII code points</summary><div id="codepoints"></div></details>
+      </div>
+    </div>
+    <div class="panel">
+      <h2>Why</h2>
+      <p class="muted">Every rule that fired, with its log-odds contribution per family, followed by the learned tokens that most separate the winner from the runner-up (only when a trained fingerprint is loaded).</p>
+      <table id="evidence"></table>
+      <div id="tokens"></div>
+    </div>
+    <div class="panel">
+      <h2>Deliberate watermark</h2>
+      <div id="watermark"></div>
+    </div>
+    <div class="panel">
+      <h2>Teach the detector</h2>
+      <p class="muted">If you know which model wrote this text, label it. Labelled samples are kept in this browser only; export them to add to the repository's <code>corpus/</code> and retrain.</p>
+      <div class="teach">
+        <label>Provider family
+          <select id="teach-family"></select>
+        </label>
+        <label>Model name (as shown by the app, e.g. "GPT-5.5 Thinking", "Claude Opus 4.8")
+          <input id="teach-model" placeholder="model name">
+        </label>
+      </div>
+      <div class="row">
+        <button id="teach-add">Add this text as a labelled sample</button>
+        <button id="teach-export">Export samples (.txt for corpus/inbox)</button>
+        <button id="teach-clear">Forget stored samples</button>
+        <span class="muted" id="teach-status"></span>
+      </div>
+    </div>
+  </section>
+</main>
+<footer>
+  <p>Method: character forensics plus a stylometric fingerprint (markdown habits, rhetoric, register, phrase lexicon) scored by hand rules and a naive-Bayes classifier trained on labelled samples in <code>corpus/</code>. Statistical token-choice watermarks (Google SynthID-Text, Anthropic's Claude watermark, OpenAI textGrain) are keyed and cannot be read without the provider's key; this page tells you whether such a watermark is expected for the attributed provider. Source and method notes: see the repository README.</p>
+  <p id="model-info"></p>
+</footer>
+<script type="module" src="app.js"></script>
+</body>
+</html>

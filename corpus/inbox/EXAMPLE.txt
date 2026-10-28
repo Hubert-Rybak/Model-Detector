@@ -1,0 +1,6 @@
+# Example of the inbox format. Files named EXAMPLE* are ignored by the trainer.
+=== openai/GPT-5.5 | p02 chat ===
+<paste the reply here>
+
+=== human/me | essay ===
+<paste a human-written text here>

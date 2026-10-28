@@ -1,8 +1,56 @@
 # Model-Detector
 
-Extract and analyze the fingerprint an LLM leaves in its text, and attribute the text to a
-provider and (where possible) a model version. Built from a survey of what providers have
-actually deployed as of October 2026 plus the published attribution research.
+Paste text from an AI assistant and see what it reveals about the model that wrote it.
+Two parts:
+
+1. **Web app** (`docs/`, deployable on GitHub Pages, runs entirely in the browser): hidden and
+   lookalike character forensics with payload decoders, a stylometric fingerprint, provider and
+   model attribution, and a "teach the detector" panel for labelling samples.
+2. **Research toolkit** (`detector/`, Python): the five-turn probe protocol in `PROTOCOL.md`, the
+   probe-battery parser with published random-choice reference distributions, and optional
+   API-based watermark presence tests.
+
+The learned fingerprint lives in `corpus/` + `docs/model.js`; it improves as labelled samples
+from real models are added (see `corpus/README.md` for the collection kit).
+
+## Web app
+
+Open `docs/index.html` through GitHub Pages (Settings → Pages → "Deploy from a branch", pick this
+branch and the `/docs` folder) or any static server (`python3 -m http.server -d docs`). A
+single-file build that also works from `file://` is produced by `node tools/bundle.mjs` into
+`dist/model-detector.html`.
+
+What the page does with pasted text:
+
+- **Character forensics**: zero-width characters, Unicode tag characters, soft hyphens, bidi
+  controls, private-use code points, narrow and no-break spaces, variation selectors not attached
+  to emoji, homoglyphs, fullwidth and math-alphanumeric letters, trailing whitespace. Where a
+  known steganographic scheme is present it decodes the payload: tag characters to ASCII,
+  variation selectors to bytes, zero-width characters as binary under several common alphabets,
+  trailing-whitespace and double-space bit patterns.
+- **Stylometric fingerprint**: markdown habits (header levels, bold density, bullet glyphs,
+  `**Term:**` list style, tables, rules, emoji), punctuation glyphs (curly vs straight quotes,
+  em dashes and their spacing, ellipsis character), rhetoric ("It's not X, it's Y", "Not X. Not Y.
+  Just Z.", "The catch?", "Here's the thing"), openers and closers ("Would you like me to…",
+  "Let me know if…"), register, sentence statistics, and a per-family phrase lexicon.
+- **Attribution**: hand rules give per-family log-odds; a naive-Bayes classifier over words,
+  bigrams and style tokens, trained on `corpus/`, is blended in once a family has at least a few
+  samples; within the winning family a model-level classifier narrows the version. Every rule and
+  the top learned tokens are shown so the verdict can be audited.
+- **Deliberate watermark**: states what the attributed provider is known to deploy and why it
+  cannot be read from the text.
+
+### Training the fingerprint
+
+```bash
+node tools/train.mjs      # corpus/ -> docs/model.js
+node tools/eval.mjs       # leave-one-out accuracy and confusion matrix
+node tools/bundle.mjs     # dist/model-detector.html single file
+```
+
+Add samples as `corpus/inbox/*.txt` paste files or one file per sample (format in
+`corpus/README.md`), then retrain and commit `docs/model.js`. The web app's "Teach the detector"
+panel exports stored samples in the inbox format.
 
 ## What is actually embedded in LLM text today (October 2026)
 
@@ -26,9 +74,9 @@ model versions at 95% (LLMmap, USENIX Security 2025); one-word random-choice ans
 temperature 1 fingerprint 167 models (Bruckner 2026). This tool implements a transparent,
 rule-based version of those ideas that works from a handful of chat replies.
 
-## Method
+## Research toolkit (Python)
 
-Three evidence layers are extracted from the replies to [PROTOCOL.md](PROTOCOL.md):
+The probe protocol extracts three evidence layers from the replies to [PROTOCOL.md](PROTOCOL.md):
 
 1. **Character forensics** (`detector/unicode_scan.py`): zero-width characters, Unicode tag
    characters, soft hyphens, bidi controls, private-use code points, narrow/no-break spaces,
@@ -54,7 +102,7 @@ rule that fired is listed so the verdict can be audited. Version hints come from
 self-report, the cutoff table, and nearest-neighbour matching of the random-choice answers
 against 22 reference models.
 
-## Usage
+### Usage
 
 ```bash
 python -m detector new mycase                 # creates samples/mycase/ with empty turn files
@@ -67,7 +115,7 @@ python -m detector.blackbox_wm --help         # optional API-based watermark pre
 
 Pure Python 3.10+, no dependencies.
 
-## Optional: black-box watermark *presence* tests (needs API access)
+### Optional: black-box watermark *presence* tests (needs API access)
 
 `detector/blackbox_wm.py` implements two tests from Gloaguen et al. (ICLR 2025) adapted to an
 OpenAI-compatible chat endpoint:
@@ -81,7 +129,7 @@ OpenAI-compatible chat endpoint:
 
 These detect that *some* keyed watermark is present; they cannot read it.
 
-## Interpreting the report
+### Interpreting the report
 
 - `confidence: high` means the top family has p ≥ 0.85 and a margin ≥ 2.5 log-odds over the
   runner-up. Self-report and a leaked system prompt are the heaviest single rules but can be
@@ -91,7 +139,7 @@ These detect that *some* keyed watermark is present; they cannot read it.
 - Version hints are suggestions, not findings. Newer models than the knowledge base knows will
   show up as "later than table".
 
-## Calibration
+### Calibration
 
 Every analysed case stays in `samples/<case>/` with `meta.json` where `ground_truth` can be
 filled in after the reveal. Re-tune weights in `signatures.py` / `scorer.py` against those.
