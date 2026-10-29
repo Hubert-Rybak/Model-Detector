@@ -364,6 +364,9 @@ export function extractFeatures(text) {
   f.bold_colon_outside = countRe(raw, /^\s*(?:[-*\u2022]|\d+[.)])\s+\*\*[^*\n:]{1,60}\*\*:/gm);
   f.bold_lead_in_items = countRe(raw, /^\s*(?:[-*\u2022]|\d+[.)])\s+\*\*[^*\n]{1,60}\*\*\s*[:\u2014\u2013-]/gm) + f.bold_colon_inside;
   f.bold_period_lead = countRe(raw, /^(?:\s*(?:[-*\u2022]|\d+[.)])\s+)?\*\*[^*\n]{3,90}[.!?]\*\*\s+[A-Za-z]/gm);
+  f.en_dash_ranges = countRe(raw, /\d\s?\u2013\s?\d/g);
+  f.hyphen_ranges = countRe(raw, /\d-\d/g);
+  f.semicolons = countRe(prose, /;/g);
   f.table_rows = countRe(raw, TABLE_ROW_RE);
   f.has_table = TABLE_SEP_RE.test(raw) ? 1 : 0;
   f.code_fences = countRe(raw, CODE_FENCE_RE);
@@ -538,6 +541,7 @@ export function tokenize(text, f, { mode = "all" } = {}) {
     "§curly_dquote": f.curly_quote_share > 0.5 ? 1 : 0, "§straight_dquote": f.curly_quote_share >= 0 && f.curly_quote_share <= 0.5 ? 1 : 0,
     "§curly_apos": f.curly_apostrophe_share > 0.5 ? 1 : 0, "§straight_apos": f.curly_apostrophe_share >= 0 && f.curly_apostrophe_share <= 0.5 ? 1 : 0,
     "§summary_section": f.summary_section, "§has_table": f.has_table, "§bold_period_lead": f.bold_period_lead, "§short_version": f.rh_short_version,
+    "§en_dash_range": f.en_dash_ranges, "§hyphen_range": f.hyphen_ranges, "§semicolon_n": f.semicolons,
   };
   for (const [t, n] of Object.entries(style)) if (n > 0) add(t, Math.min(n, 12) * S);
   add(`§opener_${f.opener}`, S);

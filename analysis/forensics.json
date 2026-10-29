@@ -1,0 +1,935 @@
+{
+ "n": 40,
+ "models": [
+  "claude-fable-5.1",
+  "claude-haiku-5.5",
+  "claude-opus-5.5",
+  "claude-sonnet-5.5"
+ ],
+ "codepoints": {
+  "claude-fable-5.1": {
+   "U+2014 EM DASH": 1,
+   "U+2013 EN DASH": 15,
+   "U+2192 RIGHTWARDS ARROW": 5
+  },
+  "claude-haiku-5.5": {
+   "U+00B0 DEGREE SIGN": 2,
+   "U+2013 EN DASH": 8,
+   "U+00BD VULGAR FRACTION ONE HALF": 2
+  },
+  "claude-opus-5.5": {
+   "U+2013 EN DASH": 12,
+   "U+00B0 DEGREE SIGN": 2,
+   "U+2014 EM DASH": 1,
+   "U+20AC EURO SIGN": 1,
+   "U+2082 SUBSCRIPT TWO": 1,
+   "U+2192 RIGHTWARDS ARROW": 2,
+   "U+2026 HORIZONTAL ELLIPSIS": 2,
+   "U+00D7 MULTIPLICATION SIGN": 1,
+   "U+00BC VULGAR FRACTION ONE QUARTER": 2,
+   "U+00BD VULGAR FRACTION ONE HALF": 2
+  },
+  "claude-sonnet-5.5": {
+   "U+00D7 MULTIPLICATION SIGN": 5,
+   "U+00B0 DEGREE SIGN": 1,
+   "U+2013 EN DASH": 1,
+   "U+2014 EM DASH": 2,
+   "U+2192 RIGHTWARDS ARROW": 4
+  }
+ },
+ "whitespace": {
+  "claude-fable-5.1": {
+   "trailing_ws_lines": 0,
+   "double_spaces": 0,
+   "tabs": 0,
+   "crlf": 0,
+   "blank_runs_ge2": 0,
+   "space_before_punct": 2,
+   "nbsp": 0
+  },
+  "claude-haiku-5.5": {
+   "trailing_ws_lines": 0,
+   "double_spaces": 1,
+   "tabs": 0,
+   "crlf": 0,
+   "blank_runs_ge2": 0,
+   "space_before_punct": 2,
+   "nbsp": 0
+  },
+  "claude-opus-5.5": {
+   "trailing_ws_lines": 0,
+   "double_spaces": 3,
+   "tabs": 0,
+   "crlf": 0,
+   "blank_runs_ge2": 0,
+   "space_before_punct": 1,
+   "nbsp": 0
+  },
+  "claude-sonnet-5.5": {
+   "trailing_ws_lines": 0,
+   "double_spaces": 1,
+   "tabs": 0,
+   "crlf": 0,
+   "blank_runs_ge2": 0,
+   "space_before_punct": 0,
+   "nbsp": 0
+  }
+ },
+ "acrostic_hits": {
+  "digits:5.1": {
+   "hits": 8,
+   "expected": 4.732,
+   "where": [
+    "claude-fable-5.1/p01",
+    "claude-fable-5.1/p05",
+    "claude-fable-5.1/p07",
+    "claude-fable-5.1/p08",
+    "claude-fable-5.1/p09",
+    "claude-haiku-5.5/p09",
+    "claude-opus-5.5/p08",
+    "claude-sonnet-5.5/p01"
+   ]
+  },
+  "digits:51": {
+   "hits": 8,
+   "expected": 4.732,
+   "where": [
+    "claude-fable-5.1/p01",
+    "claude-fable-5.1/p05",
+    "claude-fable-5.1/p07",
+    "claude-fable-5.1/p08",
+    "claude-fable-5.1/p09",
+    "claude-haiku-5.5/p09",
+    "claude-opus-5.5/p08",
+    "claude-sonnet-5.5/p01"
+   ]
+  },
+  "digits:5.5": {
+   "hits": 2,
+   "expected": 1.804,
+   "where": [
+    "claude-fable-5.1/p10",
+    "claude-sonnet-5.5/p05"
+   ]
+  },
+  "digits:55": {
+   "hits": 2,
+   "expected": 1.804,
+   "where": [
+    "claude-fable-5.1/p10",
+    "claude-sonnet-5.5/p05"
+   ]
+  }
+ },
+ "digit_contexts": [
+  "claude-fable-5.1/p01: 'conds across (roughly 1/45 the width of the full Moon). Think of that disk as thousands of pinpricks packed together. The air jostles each one independently, but at any instant the jitters average out, so the planet looks calm. A big flat stone in a stream versus a pebble.\\n\\nSo, a handy rule: **steady = planet, twinkling = star.** (Caveat: anything near the horizon twinkles, planets included, because its light has to cross far more air.)\\n\\nThe flip side matters to you: that same turbulence, which astronomers call \"seeing,\" sets the limit on how sharp your view can be on a given night. On a bad night, more magnification just gives you a bigger blur.\\n\\n## Your first night, step by step\\n\\n**1. Set up '",
+  "claude-fable-5.1/p05: 'to 80% in roughly 18 to 25 minutes.\\n\\n**Charging is less annoying than it was.** Most brands have adopted the Tesla/NACS plug, most non-Teslas can now use Superchargers, and the fast-charging network is bigger and more reliable than it was two or three years ago.\\n\\n**Battery fears have largely not panned out.** Real-world fleet data shows average degradation of roughly 1 to 2% pe'",
+  "claude-fable-5.1/p07: 'mall.** If the plan is \"45 minutes at the gym,\" skipping is easy because it\\'s a big ask. If the plan is \"put on shoes and do 10 minutes'",
+  "claude-fable-5.1/p08: ' of events, \"give me the 5th one.\"\\n- **You iterate over everything anyway** and never search. A hash table buys you nothing there.\\n- **Small collections.** For a handful of items (say, under 10 to 20),'",
+  "claude-fable-5.1/p09: '0 mg |\\n| Green tea | 25–45 mg |\\n| White tea | 15–40 mg |'",
+  "claude-fable-5.1/p10: \"her than dry or clumpy.\\n\\n5. Taste, adjust salt, and finish with lemon or parsley if you've got them.\\n\\n## Easy upgrades depending on what's in the fridge\\n\\n- **Half a can of tomatoes** stirred into the garlic for 5 minutes \"",
+  "claude-haiku-5.5/p09: '0 mg |\\n| Green tea | 25–35 mg |\\n| White tea | 15–30 mg |'",
+  "claude-opus-5.5/p08: '30, \"bob\": 25, \"carol\": 35}\\nprint(users[\"bob\"])\\n```\\n\\nWith three users there\\'s no real difference. With a million, the list may have to check a million entries to find one, while the dict goes straight to it.\\n\\n### Use a hash table when you need to…\\n\\n- **Look things up by a key**: users by ID, products by SKU, settings by name.\\n- **Check \"have I seen this?\" many times**: use a set.\\n- **Remove duplicates**: `set(items)`.\\n- **Count or group things**: word frequencies, orders per customer.\\n- **Match up two collections**: put one in a dict or set and look up from the other instead of using a nested loop. That turns O(n × m) into O(n + m).\\n- **Cache results**: memoization is just a hash table that maps inputs to outputs.\\n\\nThe most common real-world case is checking membership inside a loop:\\n\\n```python\\nbanned = load_banned_ids()   # a list of 100,000 ID'",
+  "claude-sonnet-5.5/p01: \"hts the air allows less.\\n5. **Expect things to drift.** The Earth's spin makes the sky turn 15° every \"",
+  "claude-sonnet-5.5/p05: 's do 250-350+ miles (400-550+ km) pe'",
+  "claude-sonnet-5.5/p05: \"it ended in September 2025, and incentives elsewhere change frequently, so check what's actually available where you live.\\n- **Charging depends on your housing.** With a driveway or garage it's easy. In an apartment, or if you park on the street, it can be a real hassle, and public fast charging can cost about as much per mile as gasoline and isn't always reliable. A home charger also typically costs $500-$2,000\""
+ ],
+ "bitstreams": {
+  "sentence_wordcount_parity/claude-fable-5.1": {
+   "mean_abs_z": 0.3,
+   "max_abs_z": 0.92,
+   "hits": 0
+  },
+  "sentence_wordcount_parity/claude-haiku-5.5": {
+   "mean_abs_z": 0.27,
+   "max_abs_z": 0.77,
+   "hits": 0
+  },
+  "sentence_wordcount_parity/claude-opus-5.5": {
+   "mean_abs_z": 0.62,
+   "max_abs_z": 1.13,
+   "hits": 0
+  },
+  "sentence_wordcount_parity/claude-sonnet-5.5": {
+   "mean_abs_z": 0.68,
+   "max_abs_z": 1.48,
+   "hits": 0
+  },
+  "word_length_parity/claude-fable-5.1": {
+   "mean_abs_z": 0.93,
+   "max_abs_z": 1.91,
+   "hits": 0
+  },
+  "word_length_parity/claude-haiku-5.5": {
+   "mean_abs_z": 0.62,
+   "max_abs_z": 1.64,
+   "hits": 0
+  },
+  "word_length_parity/claude-opus-5.5": {
+   "mean_abs_z": 0.99,
+   "max_abs_z": 1.86,
+   "hits": 0
+  },
+  "word_length_parity/claude-sonnet-5.5": {
+   "mean_abs_z": 1.04,
+   "max_abs_z": 2.09,
+   "hits": 0
+  },
+  "line_length_parity/claude-fable-5.1": {
+   "mean_abs_z": 0.44,
+   "max_abs_z": 1.26,
+   "hits": 0
+  },
+  "line_length_parity/claude-haiku-5.5": {
+   "mean_abs_z": 0.24,
+   "max_abs_z": 1.44,
+   "hits": 0
+  },
+  "line_length_parity/claude-opus-5.5": {
+   "mean_abs_z": 0.33,
+   "max_abs_z": 1.55,
+   "hits": 0
+  },
+  "line_length_parity/claude-sonnet-5.5": {
+   "mean_abs_z": 0.35,
+   "max_abs_z": 1.54,
+   "hits": 0
+  },
+  "sentence_endchar/claude-fable-5.1": {
+   "mean_abs_z": 0.81,
+   "max_abs_z": 4.58,
+   "hits": 0
+  },
+  "sentence_endchar/claude-haiku-5.5": {
+   "mean_abs_z": 0.31,
+   "max_abs_z": 0.94,
+   "hits": 0
+  },
+  "sentence_endchar/claude-opus-5.5": {
+   "mean_abs_z": 0.39,
+   "max_abs_z": 2.35,
+   "hits": 0
+  },
+  "sentence_endchar/claude-sonnet-5.5": {
+   "mean_abs_z": 0.34,
+   "max_abs_z": 1.73,
+   "hits": 0
+  },
+  "word_cap_parity/claude-fable-5.1": {
+   "mean_abs_z": 1.43,
+   "max_abs_z": 3.44,
+   "hits": 0
+  },
+  "word_cap_parity/claude-haiku-5.5": {
+   "mean_abs_z": 1.17,
+   "max_abs_z": 4.4,
+   "hits": 0
+  },
+  "word_cap_parity/claude-opus-5.5": {
+   "mean_abs_z": 0.78,
+   "max_abs_z": 1.92,
+   "hits": 0
+  },
+  "word_cap_parity/claude-sonnet-5.5": {
+   "mean_abs_z": 0.92,
+   "max_abs_z": 2.71,
+   "hits": 0
+  }
+ },
+ "habits": {
+  "claude-fable-5.1": {
+   "words": 425.7,
+   "en_dash_ranges": 1.4,
+   "hyphen_ranges": 0.0,
+   "en_dash_other": 0.1,
+   "em_dash": 0.1,
+   "spaced_hyphen_dash": 0.0,
+   "oxford_comma": 4.9,
+   "and_no_oxford": 5.2,
+   "eg": 0.1,
+   "for_example": 0.1,
+   "ie": 0.0,
+   "percent_sign": 0.5,
+   "percent_word": 0.0,
+   "digits_lt_10": 4.1,
+   "number_words": 3.8,
+   "unit_space": 1.7,
+   "unit_nospace": 0.1,
+   "degree": 0.0,
+   "mult_sign": 0.0,
+   "ellipsis_char": 0.0,
+   "ellipsis_dots": 0.3,
+   "curly_quotes": 0.0,
+   "straight_dquotes": 5.2,
+   "h2": 1.3,
+   "h3": 0.0,
+   "h1": 0.1,
+   "bullet_dash": 3.2,
+   "bullet_star": 0.0,
+   "numbered": 1.7,
+   "bold_colon_in": 0.8,
+   "bold_colon_out": 0.3,
+   "bold_period_in": 4.2,
+   "bold_line": 1.1,
+   "table": 0.2,
+   "blockquote": 0.1,
+   "parens": 4.9,
+   "semicolons": 1.0,
+   "colons": 3.2,
+   "exclaim": 0.1,
+   "questions": 0.7,
+   "contractions": 8.9,
+   "code_fence": 0.1,
+   "inline_code": 1.4,
+   "italic": 1.2,
+   "sent_len_mean": 15.72,
+   "para_count": 13.0,
+   "ends_with_question": 0.0,
+   "closing_offer": 0.2
+  },
+  "claude-haiku-5.5": {
+   "words": 344.8,
+   "en_dash_ranges": 0.8,
+   "hyphen_ranges": 0.0,
+   "en_dash_other": 0.0,
+   "em_dash": 0.0,
+   "spaced_hyphen_dash": 0.0,
+   "oxford_comma": 4.0,
+   "and_no_oxford": 5.7,
+   "eg": 0.0,
+   "for_example": 0.0,
+   "ie": 0.0,
+   "percent_sign": 0.1,
+   "percent_word": 0.0,
+   "digits_lt_10": 2.0,
+   "number_words": 2.2,
+   "unit_space": 1.9,
+   "unit_nospace": 0.0,
+   "degree": 0.2,
+   "mult_sign": 0.0,
+   "ellipsis_char": 0.0,
+   "ellipsis_dots": 0.2,
+   "curly_quotes": 0.0,
+   "straight_dquotes": 2.4,
+   "h2": 0.3,
+   "h3": 0.4,
+   "h1": 0.2,
+   "bullet_dash": 4.3,
+   "bullet_star": 0.0,
+   "numbered": 2.0,
+   "bold_colon_in": 0.7,
+   "bold_colon_out": 0.0,
+   "bold_period_in": 3.1,
+   "bold_line": 1.0,
+   "table": 0.2,
+   "blockquote": 0.0,
+   "parens": 1.4,
+   "semicolons": 0.0,
+   "colons": 1.4,
+   "exclaim": 0.1,
+   "questions": 0.7,
+   "contractions": 7.6,
+   "code_fence": 0.1,
+   "inline_code": 0.7,
+   "italic": 0.4,
+   "sent_len_mean": 14.74,
+   "para_count": 8.6,
+   "ends_with_question": 0.0,
+   "closing_offer": 0.1
+  },
+  "claude-opus-5.5": {
+   "words": 447.8,
+   "en_dash_ranges": 1.1,
+   "hyphen_ranges": 0.0,
+   "en_dash_other": 0.1,
+   "em_dash": 0.1,
+   "spaced_hyphen_dash": 0.0,
+   "oxford_comma": 4.0,
+   "and_no_oxford": 7.6,
+   "eg": 0.0,
+   "for_example": 0.1,
+   "ie": 0.0,
+   "percent_sign": 0.1,
+   "percent_word": 0.0,
+   "digits_lt_10": 2.6,
+   "number_words": 4.9,
+   "unit_space": 1.5,
+   "unit_nospace": 0.0,
+   "degree": 0.2,
+   "mult_sign": 0.1,
+   "ellipsis_char": 0.2,
+   "ellipsis_dots": 0.1,
+   "curly_quotes": 0.0,
+   "straight_dquotes": 5.6,
+   "h2": 0.8,
+   "h3": 0.7,
+   "h1": 0.3,
+   "bullet_dash": 6.7,
+   "bullet_star": 0.0,
+   "numbered": 2.0,
+   "bold_colon_in": 1.0,
+   "bold_colon_out": 1.1,
+   "bold_period_in": 4.5,
+   "bold_line": 0.7,
+   "table": 0.1,
+   "blockquote": 0.5,
+   "parens": 3.0,
+   "semicolons": 0.2,
+   "colons": 2.5,
+   "exclaim": 0.3,
+   "questions": 0.6,
+   "contractions": 9.4,
+   "code_fence": 0.2,
+   "inline_code": 1.5,
+   "italic": 1.2,
+   "sent_len_mean": 14.57,
+   "para_count": 10.0,
+   "ends_with_question": 0.0,
+   "closing_offer": 0.2
+  },
+  "claude-sonnet-5.5": {
+   "words": 435.5,
+   "en_dash_ranges": 0.1,
+   "hyphen_ranges": 1.8,
+   "en_dash_other": 0.0,
+   "em_dash": 0.2,
+   "spaced_hyphen_dash": 0.0,
+   "oxford_comma": 5.9,
+   "and_no_oxford": 6.7,
+   "eg": 0.0,
+   "for_example": 0.1,
+   "ie": 0.0,
+   "percent_sign": 0.2,
+   "percent_word": 0.0,
+   "digits_lt_10": 3.5,
+   "number_words": 2.8,
+   "unit_space": 2.1,
+   "unit_nospace": 0.0,
+   "degree": 0.1,
+   "mult_sign": 0.5,
+   "ellipsis_char": 0.0,
+   "ellipsis_dots": 0.2,
+   "curly_quotes": 0.0,
+   "straight_dquotes": 4.4,
+   "h2": 1.4,
+   "h3": 0.0,
+   "h1": 0.3,
+   "bullet_dash": 6.0,
+   "bullet_star": 0.0,
+   "numbered": 2.1,
+   "bold_colon_in": 1.4,
+   "bold_colon_out": 0.0,
+   "bold_period_in": 4.7,
+   "bold_line": 0.9,
+   "table": 0.2,
+   "blockquote": 0.0,
+   "parens": 3.9,
+   "semicolons": 0.3,
+   "colons": 1.6,
+   "exclaim": 0.4,
+   "questions": 0.9,
+   "contractions": 9.4,
+   "code_fence": 0.1,
+   "inline_code": 1.2,
+   "italic": 0.7,
+   "sent_len_mean": 15.28,
+   "para_count": 9.6,
+   "ends_with_question": 0.0,
+   "closing_offer": 0.5
+  }
+ },
+ "exclusive": {
+  "claude-fable-5.1": [
+   [
+    "do that",
+    3
+   ],
+   [
+    "made",
+    2
+   ],
+   [
+    "frequent",
+    2
+   ],
+   [
+    "caveat",
+    2
+   ],
+   [
+    "were",
+    2
+   ],
+   [
+    "thousands",
+    2
+   ],
+   [
+    "yet",
+    2
+   ],
+   [
+    "leaks",
+    2
+   ],
+   [
+    "making",
+    2
+   ],
+   [
+    "details",
+    2
+   ],
+   [
+    "mediocre",
+    2
+   ],
+   [
+    "honest",
+    2
+   ],
+   [
+    "rival",
+    2
+   ],
+   [
+    "got",
+    2
+   ],
+   [
+    "weeks",
+    2
+   ],
+   [
+    "thousands of",
+    2
+   ],
+   [
+    "you a",
+    2
+   ],
+   [
+    "the start",
+    2
+   ],
+   [
+    "one that",
+    2
+   ],
+   [
+    "a machine",
+    2
+   ],
+   [
+    "heat into",
+    2
+   ],
+   [
+    "a box",
+    2
+   ],
+   [
+    "a day",
+    2
+   ],
+   [
+    "whole thing",
+    2
+   ],
+   [
+    "was two",
+    2
+   ],
+   [
+    "every morning",
+    2
+   ],
+   [
+    "me the",
+    2
+   ],
+   [
+    "the time",
+    2
+   ],
+   [
+    "not the",
+    2
+   ],
+   [
+    "can rival",
+    2
+   ],
+   [
+    "almost always",
+    2
+   ],
+   [
+    "most people",
+    2
+   ],
+   [
+    "it at the",
+    2
+   ],
+   [
+    "heat into the",
+    2
+   ],
+   [
+    "gives you a",
+    2
+   ],
+   [
+    "the whole thing",
+    2
+   ],
+   [
+    "to do that",
+    2
+   ],
+   [
+    "on the way",
+    2
+   ]
+  ],
+  "claude-haiku-5.5": [
+   [
+    "cupboard",
+    2
+   ],
+   [
+    "figures",
+    2
+   ],
+   [
+    "so you",
+    2
+   ],
+   [
+    "each time",
+    2
+   ],
+   [
+    "keeps the",
+    2
+   ],
+   [
+    "set a",
+    2
+   ],
+   [
+    "in the kitchen",
+    2
+   ],
+   [
+    "keeps the habit",
+    2
+   ]
+  ],
+  "claude-opus-5.5": [
+   [
+    "ways",
+    2
+   ],
+   [
+    "earlier",
+    2
+   ],
+   [
+    "seem",
+    2
+   ],
+   [
+    "flashes",
+    2
+   ],
+   [
+    "it'll",
+    2
+   ],
+   [
+    "billion",
+    2
+   ],
+   [
+    "climbed",
+    2
+   ],
+   [
+    "exact",
+    2
+   ],
+   [
+    "suddenly",
+    2
+   ],
+   [
+    "hold",
+    2
+   ],
+   [
+    "mind",
+    2
+   ],
+   [
+    "falling",
+    2
+   ],
+   [
+    "drop",
+    2
+   ],
+   [
+    "cuts",
+    2
+   ],
+   [
+    "particular",
+    2
+   ],
+   [
+    "five minutes",
+    2
+   ],
+   [
+    "minutes instead",
+    2
+   ],
+   [
+    "work the",
+    2
+   ],
+   [
+    "matter how",
+    2
+   ],
+   [
+    "right now",
+    2
+   ],
+   [
+    "never look",
+    2
+   ],
+   [
+    "here's how",
+    2
+   ],
+   [
+    "it out",
+    2
+   ],
+   [
+    "no matter",
+    2
+   ],
+   [
+    "before it",
+    2
+   ],
+   [
+    "would be",
+    2
+   ],
+   [
+    "one in",
+    2
+   ],
+   [
+    "half as",
+    2
+   ],
+   [
+    "a particular",
+    2
+   ],
+   [
+    "much harder",
+    2
+   ],
+   [
+    "to skip",
+    2
+   ],
+   [
+    "you change",
+    2
+   ],
+   [
+    "matter how much",
+    2
+   ],
+   [
+    "no matter how",
+    2
+   ],
+   [
+    "you need to",
+    2
+   ],
+   [
+    "minutes instead of",
+    2
+   ],
+   [
+    "half as much",
+    2
+   ],
+   [
+    "than a few",
+    2
+   ],
+   [
+    "about half as",
+    2
+   ]
+  ],
+  "claude-sonnet-5.5": [
+   [
+    "on an",
+    3
+   ],
+   [
+    "might be",
+    3
+   ],
+   [
+    "lean",
+    2
+   ],
+   [
+    "least",
+    2
+   ],
+   [
+    "noticed",
+    2
+   ],
+   [
+    "onto",
+    2
+   ],
+   [
+    "however",
+    2
+   ],
+   [
+    "knob",
+    2
+   ],
+   [
+    "bother",
+    2
+   ],
+   [
+    "tended",
+    2
+   ],
+   [
+    "decide",
+    2
+   ],
+   [
+    "elsewhere",
+    2
+   ],
+   [
+    "headache",
+    2
+   ],
+   [
+    "wins",
+    2
+   ],
+   [
+    "hour so",
+    2
+   ],
+   [
+    "easier the",
+    2
+   ],
+   [
+    "is for",
+    2
+   ],
+   [
+    "a target",
+    2
+   ],
+   [
+    "lean on",
+    2
+   ],
+   [
+    "things to",
+    2
+   ],
+   [
+    "probably already",
+    2
+   ],
+   [
+    "at least",
+    2
+   ],
+   [
+    "why bother",
+    2
+   ],
+   [
+    "back for",
+    2
+   ],
+   [
+    "years and",
+    2
+   ],
+   [
+    "have tended",
+    2
+   ],
+   [
+    "do the",
+    2
+   ],
+   [
+    "it seems",
+    2
+   ],
+   [
+    "is convenient",
+    2
+   ],
+   [
+    "worse it",
+    2
+   ],
+   [
+    "what's actually",
+    2
+   ],
+   [
+    "and often",
+    2
+   ],
+   [
+    "can add",
+    2
+   ],
+   [
+    "also helps",
+    2
+   ],
+   [
+    "is tight",
+    2
+   ],
+   [
+    "you've probably already",
+    2
+   ]
+  ]
+ }
+}
