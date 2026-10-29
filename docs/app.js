@@ -14,7 +14,8 @@ function render(r) {
   $("verdict").innerHTML = `<div class="verdict">${esc(FAMILIES[top].name)}</div><span class="tag ${r.confidence}">confidence: ${r.confidence}</span> <span class="tag">p = ${r.probs[top].toFixed(2)}</span> <span class="tag">margin ${r.margin} log-odds</span>
     <div class="muted" style="margin-top:8px">Fingerprint strength</div><div class="meter"><i style="width:${Math.round(100 * r.fingerprint_strength)}%"></i></div>`;
   $("bars").innerHTML = r.ranked.slice(0, 6).map((k) => `<div>${esc(FAMILIES[k].name.split(" (")[0])}</div><div class="bar"><i style="width:${Math.max(1, Math.round(100 * r.probs[k]))}%"></i></div><div class="mono">${r.probs[k].toFixed(3)}</div>`).join("");
-  const nbNote = r.nb ? `Learned fingerprint used at weight ${r.nb_weight.toFixed(2)} (${Object.entries(r.nb.docs).map(([k, v]) => `${k}: ${v} docs`).join(", ")}).` : "No trained fingerprint loaded: hand rules only.";
+  const famClasses = r.nb ? Object.keys(r.nb.docs).length : 0;
+  const nbNote = !r.nb ? "No trained fingerprint loaded: hand rules only." : famClasses < 2 ? `Learned fingerprint holds one provider family only (${Object.entries(r.nb.docs).map(([k, v]) => `${k}: ${v} docs`).join(", ")}), so provider attribution is from hand rules; the model-level layer still applies within that family.` : `Learned fingerprint used at weight ${r.nb_weight.toFixed(2)} (${Object.entries(r.nb.docs).map(([k, v]) => `${k}: ${v} docs`).join(", ")}).`;
   $("verdict-notes").textContent = `${r.text_stats.words} words, ${r.text_stats.sentences} sentences. ${nbNote} ${r.text_stats.words < 120 ? "Short texts carry little signal; treat the verdict as a hint." : ""}`;
   const mEval = MODEL && MODEL.eval && MODEL.eval.models && MODEL.eval.models[top];
   const evalNote = mEval ? ` Hold-one-prompt-out accuracy of this model-level classifier on the corpus: ${Math.round(100 * mEval.accuracy)}% over ${mEval.classes} models (chance ${Math.round(100 * mEval.chance)}%)${mEval.accuracy < 0.5 ? ", so treat it as a weak hint" : ""}.` : "";
@@ -43,7 +44,9 @@ function run() {
   if (!text.trim()) { $("status").textContent = "Paste some text first."; return; }
   $("status").textContent = "Analyzing…";
   setTimeout(() => {
-    const model = (MODEL && MODEL.family && Object.keys(MODEL.family.classes || {}).length >= 2) ? MODEL : null;
+    // Pass the trained model whenever it has classes: with a single provider family the family
+    // layer is neutral, but the model-level layer still narrows the version inside that family.
+    const model = (MODEL && MODEL.family && Object.keys(MODEL.family.classes || {}).length >= 1) ? MODEL : null;
     const r = analyze(text, model);
     render(r);
     $("status").textContent = "";

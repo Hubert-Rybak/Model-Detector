@@ -274,6 +274,7 @@ export const CLOSERS = [
   ["offer_if_youd_like", /\bif you('d| would) like\b|\bif you want\b|\bif you need\b|\bif you'?re interested\b/i], ["let_me_know", /\blet me know\b/i],
   ["feel_free", /\bfeel free\b/i], ["hope_this_helps", /\bhope (this|that|it) helps\b/i], ["happy_to_help", /\bhappy to (help|assist|elaborate|dive|go)\b/i],
   ["any_other_questions", /\bany (other|further|more) questions\b/i], ["ends_with_question", /\?\s*$/], ["emoji_signoff", /[\u{1F300}-\u{1FAFF}\u{2600}-\u{27BF}]\s*$/u],
+  ["if_you_tell_me", /\b(?:if you (?:tell|let|give|send|share) me|tell me (?:a bit|more|what|which|roughly|about|how)|let me know (?:what|which|how|where|roughly)[^.\n]{0,80}\bi can\b)/i],
 ];
 export const RHETORIC = {
   antithesis_not_but: [/\b(?:is|it'?s|that'?s|this is|was|are|were|isn'?t|aren'?t|wasn'?t|not)\s+(?:just|only|merely|simply|about|really)?\s*[^.!?;:\n]{2,70}?(?:\u2014|\u2013|,|;|\.)\s*(?:it'?s|but|rather|that'?s)\b/gi],
@@ -298,6 +299,7 @@ export const RHETORIC = {
   quoted_phrases: [/["\u201C][^"\u201D\n]{2,60}["\u201D]/g],
   numbers_with_units: [/\b\d+(?:[.,]\d+)?\s?(?:%|km|mi|kg|lb|ms|s|m|cm|mm|\u00B0[CF]?|px|GB|MB|KB|TB|Hz|kHz|MHz|GHz|W|kW|V|A|mAh)\b/g],
   contractions: [/\b\w+(?:n't|'re|'ve|'ll|'d|'m|'s)\b|\b\w+(?:n\u2019t|\u2019re|\u2019ve|\u2019ll|\u2019d|\u2019m|\u2019s)\b/gi],
+  short_version: [/\b(?:short version|the short answer|quick version)\b/gi],
 };
 
 export function stripCode(text) { return text.replace(CODE_FENCE_RE, "\n").replace(INLINE_CODE_RE, " "); }
@@ -361,6 +363,7 @@ export function extractFeatures(text) {
   f.bold_colon_inside = countRe(raw, /^\s*(?:[-*\u2022]|\d+[.)])\s+\*\*[^*\n]{1,60}:\*\*/gm);
   f.bold_colon_outside = countRe(raw, /^\s*(?:[-*\u2022]|\d+[.)])\s+\*\*[^*\n:]{1,60}\*\*:/gm);
   f.bold_lead_in_items = countRe(raw, /^\s*(?:[-*\u2022]|\d+[.)])\s+\*\*[^*\n]{1,60}\*\*\s*[:\u2014\u2013-]/gm) + f.bold_colon_inside;
+  f.bold_period_lead = countRe(raw, /^(?:\s*(?:[-*\u2022]|\d+[.)])\s+)?\*\*[^*\n]{3,90}[.!?]\*\*\s+[A-Za-z]/gm);
   f.table_rows = countRe(raw, TABLE_ROW_RE);
   f.has_table = TABLE_SEP_RE.test(raw) ? 1 : 0;
   f.code_fences = countRe(raw, CODE_FENCE_RE);
@@ -429,7 +432,7 @@ export function rulesScore(f, u) {
   const emr = f.em_dash_rate;
   if (emr >= 10) ev.push(["em_dash_heavy", `em-dash rate ${emr}/1000 words (heavy)`, W({ openai: 1.0, anthropic: 0.8, google: 0.1, xai: 0.3, meta: -0.8, deepseek: -0.3, alibaba: -0.5, mistral: -0.6, human: -0.8 })]);
   else if (emr >= 3) ev.push(["em_dash_some", `em-dash rate ${emr}/1000 words`, W({ openai: 0.4, anthropic: 0.4, google: 0.1, xai: 0.2, meta: -0.4, mistral: -0.3, human: -0.2 })]);
-  else if (long) ev.push(["em_dash_none", "no em dashes in a long sample", W({ openai: -0.8, anthropic: -0.6, meta: 0.5, mistral: 0.4, alibaba: 0.3, deepseek: 0.2, google: 0.1, human: 0.5 })]);
+  else if (long) ev.push(["em_dash_none", "no em dashes in a long sample", W({ openai: -0.8, anthropic: -0.3, meta: 0.5, mistral: 0.4, alibaba: 0.3, deepseek: 0.2, google: 0.1, human: 0.3 })]);
   if (f.spaced_hyphen_dash_rate >= 3) ev.push(["spaced_hyphen_dash", "uses ' - ' spaced hyphens as dashes", W({ meta: 0.6, mistral: 0.5, alibaba: 0.4, deepseek: 0.3, google: 0.3, openai: -0.4, anthropic: -0.3, human: 0.4 })]);
   if (f.ellipsis_char > 0 && f.ellipsis_dots === 0) ev.push(["ellipsis_char", "uses the single-character ellipsis (U+2026)", W({ openai: 0.6, google: 0.2, anthropic: -0.3 })]);
   if (f.multiplication_sign > 0) ev.push(["mult_sign", "uses the U+00D7 multiplication sign", W({ openai: 0.3, google: 0.3, deepseek: 0.2, anthropic: 0.1, human: -0.3 })]);
@@ -438,18 +441,18 @@ export function rulesScore(f, u) {
     if (f.headers_h3 > f.headers_h2) ev.push(["h3_preference", "prefers ### headers", W({ openai: 0.5, deepseek: 0.3, alibaba: 0.3, anthropic: -0.2 })]);
     if (f.headers_h2 > f.headers_h3) ev.push(["h2_preference", "prefers ## headers", W({ anthropic: 0.4, google: 0.4, openai: -0.1 })]);
     if (f.headers_with_emoji) ev.push(["emoji_headers", "emoji in headers", W({ google: 0.8, openai: 0.6, xai: 0.6, deepseek: 0.4, anthropic: -1.0, human: -0.5 })]);
-  } else if (long) ev.push(["no_headers", "no markdown headers in a long sample", W({ anthropic: 0.4, meta: 0.3, mistral: 0.3, xai: 0.3, openai: -0.2, google: -0.3, human: 0.5 })]);
-  if (f.bold_whole_line >= 2) ev.push(["bold_pseudo_headers", "bold lines used as section headers", W({ openai: 0.6, meta: 0.5, google: 0.3, alibaba: 0.3, anthropic: -0.3, human: -0.5 })]);
+  } else if (long) ev.push(["no_headers", "no markdown headers in a long sample", W({ anthropic: 0.4, meta: 0.3, mistral: 0.3, xai: 0.3, openai: -0.2, google: -0.3, human: 0.2 })]);
+  if (f.bold_whole_line >= 2) ev.push(["bold_pseudo_headers", "bold lines used as section headers", W({ openai: 0.4, meta: 0.4, google: 0.3, alibaba: 0.3, anthropic: 0.2, human: -0.5 })]);
   if (f.bold_rate >= 25) ev.push(["bold_heavy", `bold rate ${f.bold_rate}/1000 words (heavy)`, W({ google: 0.6, openai: 0.4, deepseek: 0.4, alibaba: 0.4, meta: 0.3, anthropic: -0.6, xai: 0.2, human: -0.8 })]);
-  else if (f.bold_rate === 0 && long) ev.push(["no_bold", "no bold at all in a long sample", W({ anthropic: 0.6, mistral: 0.3, meta: 0.1, openai: -0.5, google: -0.6, human: 0.6 })]);
-  if (f.has_table) ev.push(["table", "uses a markdown table", W({ openai: 1.0, google: 0.5, deepseek: 0.4, alibaba: 0.3, anthropic: -0.4, meta: -0.5, xai: 0.2, mistral: -0.3, human: -0.8 })]);
+  else if (f.bold_rate === 0 && long) ev.push(["no_bold", "no bold at all in a long sample", W({ anthropic: 0.5, mistral: 0.3, meta: 0.1, openai: -0.5, google: -0.6, human: 0.3 })]);
+  if (f.has_table) ev.push(["table", "uses a markdown table", W({ openai: 1.0, google: 0.5, deepseek: 0.4, alibaba: 0.3, anthropic: -0.1, meta: -0.5, xai: 0.2, mistral: -0.3, human: -0.8 })]);
   if (f.bullet_lines && f.bullet_star > f.bullet_dash) ev.push(["star_bullets", "uses '*' bullets", W({ google: 1.2, meta: 0.4, mistral: 0.3, openai: -0.6, anthropic: -0.8, deepseek: -0.3 })]);
   if (f.bullet_dot) ev.push(["dot_bullets", "uses '\u2022' bullets", W({ meta: 0.5, mistral: 0.3, openai: 0.1, anthropic: -0.3, google: -0.2, human: 0.3 })]);
   if (f.numbered_paren_style) ev.push(["paren_numbering", "uses '1)' numbering", W({ meta: 0.3, mistral: 0.3, xai: 0.2, openai: -0.2, anthropic: -0.2, human: 0.3 })]);
   if (f.bold_colon_inside >= 2 && f.bold_colon_outside === 0) ev.push(["bold_colon_inside", "'**Term:** text' list items (colon inside bold)", W({ openai: 0.4, google: 0.4, deepseek: 0.3, alibaba: 0.3, anthropic: 0.1, human: -0.5 })]);
   if (f.bold_colon_outside >= 2 && f.bold_colon_inside === 0) ev.push(["bold_colon_outside", "'**Term**: text' list items (colon outside bold)", W({ anthropic: 0.5, meta: 0.3, mistral: 0.3, xai: 0.2, openai: -0.3, human: -0.3 })]);
   if (f.emoji_line_starts >= 2 || (f.emoji_rate >= 8 && f.emoji_count >= 3)) ev.push(["emoji_heavy", `emoji-heavy formatting (${f.emoji_count} emoji)`, W({ google: 0.8, openai: 0.5, xai: 0.7, deepseek: 0.6, alibaba: 0.5, anthropic: -1.2, meta: 0.2, mistral: -0.2, human: -0.3 })]);
-  else if (f.emoji_count === 0 && long) ev.push(["no_emoji", "no emoji", W({ anthropic: 0.4, mistral: 0.2, meta: 0.1, google: -0.3, xai: -0.2, deepseek: -0.2, human: 0.3 })]);
+  else if (f.emoji_count === 0 && long) ev.push(["no_emoji", "no emoji", W({ anthropic: 0.4, mistral: 0.2, meta: 0.1, google: -0.3, xai: -0.2, deepseek: -0.2, human: 0.1 })]);
   if (f.horizontal_rules >= 1) ev.push(["horizontal_rules", "uses --- horizontal rules", W({ openai: 0.7, google: 0.3, deepseek: 0.3, alibaba: 0.3, anthropic: -0.4, meta: -0.2, human: -0.5 })]);
   if (f.summary_section) ev.push(["summary_section", "ends with a summary/takeaways section", W({ google: 0.5, openai: 0.4, deepseek: 0.4, alibaba: 0.4, meta: 0.3, anthropic: -0.2, human: -0.4 })]);
   if (f.share_one_line_paragraphs >= 0.5 && f.n_paragraphs >= 6 && f.list_share_of_lines < 0.4) ev.push(["one_line_paragraphs", `${Math.round(100 * f.share_one_line_paragraphs)}% of paragraphs are single short lines (punchy GPT-5 style)`, W({ openai: 1.0, xai: 0.4, anthropic: -0.2, google: -0.3, meta: -0.4, human: -0.3 })]);
@@ -475,14 +478,20 @@ export function rulesScore(f, u) {
   if (f.closer_offer_would_you_like || f.closer_offer_want_me_to) ev.push(["closer_offer", `ends with an offer to do more: '...${f.last_words}'`, W({ openai: 1.6, google: 0.4, anthropic: 0.2, xai: 0.2, meta: -0.6, mistral: -0.4, deepseek: -0.2, alibaba: -0.2, human: -1.5 })]);
   if (f.closer_let_me_know || f.closer_hope_this_helps || f.closer_any_other_questions || f.closer_feel_free) ev.push(["closer_assistant", `ends with 'let me know / hope this helps / feel free': '...${f.last_words}'`, W({ meta: 1.2, alibaba: 0.9, deepseek: 0.9, mistral: 0.7, google: 0.4, xai: 0.3, openai: -0.3, anthropic: -0.3, human: -1.0 })]);
   if (f.closer_emoji_signoff) ev.push(["emoji_signoff", "signs off with an emoji", W({ deepseek: 1.5, alibaba: 1.2, google: 0.4, xai: 0.4, openai: -0.3, anthropic: -1.2, human: 0 })]);
+  if (f.closer_if_you_tell_me) ev.push(["closer_if_you_tell_me", `ends with 'if you tell me X, I can Y' (Claude's form of the follow-up offer): '...${f.last_words}'`, W({ anthropic: 0.9, openai: 0.1, google: 0.1, human: -0.6 })]);
+  if (f.rh_short_version) ev.push(["short_version", "'short version:' / 'the short version' framing", W({ anthropic: 0.5, openai: 0.3, human: -0.3 })]);
+  if (f.bold_period_lead >= 2) ev.push(["bold_period_lead", "bold lead-in sentences ending inside the bold ('**Do this.** because...')", W({ anthropic: 0.5, openai: 0.1, google: 0.1, human: -0.5 })]);
+  const mdElems = f.headers_total + f.bold_spans + f.bullet_lines + f.numbered_lines + f.table_rows + f.code_fences;
+  if (mdElems >= 5) ev.push(["markdown_structure", `${mdElems} markdown elements (headers, bold, lists, tables, code): assistant-style formatting`, W({ human: -1.5, openai: 0.2, anthropic: 0.2, google: 0.2, deepseek: 0.2, alibaba: 0.2, meta: 0.1, xai: 0.1, mistral: 0.1 })]);
+  else if (mdElems >= 2) ev.push(["some_markdown", `${mdElems} markdown elements`, W({ human: -0.6 })]);
   if (f.closer_ends_with_question && !(f.closer_offer_would_you_like || f.closer_offer_want_me_to)) ev.push(["ends_question", "ends with a question", W({ openai: 0.4, xai: 0.4, google: 0.3, anthropic: 0.2 })]);
   const lex = {};
   for (const [k, v] of Object.entries(f)) if (k.startsWith("lex:")) { const [, fam, ph] = k.split(":"); (lex[fam] ||= []).push(v > 1 ? `${ph}\u00D7${v}` : ph); }
   for (const [fam, hits] of Object.entries(lex)) ev.push([`lexicon:${fam}`, "phrases: " + hits.slice(0, 8).join(", "), W({ [fam]: Math.min(1.5, 0.3 * hits.length), human: -Math.min(0.6, 0.1 * hits.length) })]);
   if (nw >= 700) ev.push(["very_long", `${nw} words`, W({ google: 0.4, openai: 0.3, deepseek: 0.3, alibaba: 0.3, anthropic: -0.2 })]);
   // LLM-ness aggregate: very low tell count on a long plain text favours "human"
-  const tells = ev.filter(([id]) => !["straight_quotes", "em_dash_none", "no_headers", "no_bold", "no_emoji", "hidden_chars", "spaced_hyphen_dash", "dot_bullets", "paren_numbering", "parentheticals", "contractions", "conjunction_starts"].includes(id)).length;
-  if (long && tells === 0) ev.push(["no_ai_tells", "long text with none of the usual assistant tells", W({ human: 1.5, openai: -0.4, google: -0.4, anthropic: -0.2 })]);
+  const tells = ev.filter(([id]) => !["straight_quotes", "em_dash_none", "no_headers", "no_bold", "no_emoji", "hidden_chars", "spaced_hyphen_dash", "dot_bullets", "paren_numbering", "parentheticals", "contractions", "conjunction_starts", "some_markdown", "markdown_structure"].includes(id)).length;
+  if (long && tells === 0 && mdElems === 0) ev.push(["no_ai_tells", "long plain text with none of the usual assistant tells and no markdown", W({ human: 1.5, openai: -0.4, google: -0.4, anthropic: -0.2 })]);
   if (/\b(?:teh|recieve|definately|alot|seperate|occured|wich|becuase)\b/i.test(f.first_words + " " + f.last_words) || (f.n_words > 60 && /\b[a-z]+\b\s{2,}[a-z]/.test("")))
     ev.push(["typos", "common human misspellings", W({ human: 1.0 })]);
   const scores = Object.fromEntries(FAMILY_IDS.map((k) => [k, 0]));
@@ -528,7 +537,7 @@ export function tokenize(text, f, { mode = "all" } = {}) {
     "§worth_noting": f.rh_worth_noting, "§dash_aside": f.rh_dash_aside, "§conj_start": f.rh_sentence_initial_and_but, "§one_word_sent": f.rh_one_word_sentence,
     "§curly_dquote": f.curly_quote_share > 0.5 ? 1 : 0, "§straight_dquote": f.curly_quote_share >= 0 && f.curly_quote_share <= 0.5 ? 1 : 0,
     "§curly_apos": f.curly_apostrophe_share > 0.5 ? 1 : 0, "§straight_apos": f.curly_apostrophe_share >= 0 && f.curly_apostrophe_share <= 0.5 ? 1 : 0,
-    "§summary_section": f.summary_section, "§has_table": f.has_table,
+    "§summary_section": f.summary_section, "§has_table": f.has_table, "§bold_period_lead": f.bold_period_lead, "§short_version": f.rh_short_version,
   };
   for (const [t, n] of Object.entries(style)) if (n > 0) add(t, Math.min(n, 12) * S);
   add(`§opener_${f.opener}`, S);
