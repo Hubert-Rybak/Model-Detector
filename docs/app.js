@@ -16,7 +16,9 @@ function render(r) {
   $("bars").innerHTML = r.ranked.slice(0, 6).map((k) => `<div>${esc(FAMILIES[k].name.split(" (")[0])}</div><div class="bar"><i style="width:${Math.max(1, Math.round(100 * r.probs[k]))}%"></i></div><div class="mono">${r.probs[k].toFixed(3)}</div>`).join("");
   const nbNote = r.nb ? `Learned fingerprint used at weight ${r.nb_weight.toFixed(2)} (${Object.entries(r.nb.docs).map(([k, v]) => `${k}: ${v} docs`).join(", ")}).` : "No trained fingerprint loaded: hand rules only.";
   $("verdict-notes").textContent = `${r.text_stats.words} words, ${r.text_stats.sentences} sentences. ${nbNote} ${r.text_stats.words < 120 ? "Short texts carry little signal; treat the verdict as a hint." : ""}`;
-  $("model-level").innerHTML = r.model_level ? `<div class="muted" style="margin-top:8px">Within ${esc(FAMILIES[top].name.split(" (")[0])}, by learned model-level fingerprint:</div><ul>${r.model_level.map((m) => `<li><b>${esc(m.model)}</b>${m.p !== null ? ` p = ${m.p.toFixed(2)}` : ""} <span class="muted">(${m.docs} training docs${m.note ? ", " + esc(m.note) : ""})</span></li>`).join("")}</ul>` : "";
+  const mEval = MODEL && MODEL.eval && MODEL.eval.models && MODEL.eval.models[top];
+  const evalNote = mEval ? ` Hold-one-prompt-out accuracy of this model-level classifier on the corpus: ${Math.round(100 * mEval.accuracy)}% over ${mEval.classes} models (chance ${Math.round(100 * mEval.chance)}%)${mEval.accuracy < 0.5 ? ", so treat it as a weak hint" : ""}.` : "";
+  $("model-level").innerHTML = r.model_level ? `<div class="muted" style="margin-top:8px">Within ${esc(FAMILIES[top].name.split(" (")[0])}, by learned model-level fingerprint:${esc(evalNote)}</div><ul>${r.model_level.map((m) => `<li><b>${esc(m.model)}</b>${m.p !== null ? ` p = ${m.p.toFixed(2)}` : ""} <span class="muted">(${m.docs} training docs${m.note ? ", " + esc(m.note) : ""})</span></li>`).join("")}</ul>` : "";
   $("findings").innerHTML = r.findings.map(([sev, msg]) => `<li><span class="sev-${sev}">${sev}</span> ${esc(msg)}</li>`).join("");
   $("decoded").innerHTML = r.hidden.length ? `<h3 style="font-size:14px;margin:10px 0 6px">Decoded payload attempts</h3>` + r.hidden.map((h) => `<div class="note" style="margin-bottom:8px"><b>${esc(h.scheme)}</b> <span class="muted">(${h.count} carrier chars${h.printable !== undefined ? `, ${Math.round(100 * h.printable)}% printable` : ""})</span>${h.bits ? `<div class="mono">bits: ${esc(h.bits)}${h.bits.length >= 256 ? "…" : ""}</div>` : ""}${h.hex ? `<div class="mono">hex: ${esc(h.hex)}</div>` : ""}${h.decoded !== undefined ? `<div class="mono">decoded: ${esc(h.decoded.slice(0, 400))}</div>` : ""}${h.note ? `<div class="muted">${esc(h.note)}</div>` : ""}</div>`).join("") : "";
   $("annot").innerHTML = annotate($("input").value).map((s) => s.hidden ? `<span class="hid" title="${esc(s.klass)}">〈${esc(s.label)}〉</span>` : s.mark ? `<span class="mk" title="${esc(s.label)}">${esc(s.text)}</span>` : esc(s.text)).join("");
@@ -25,7 +27,15 @@ function render(r) {
   $("evidence").innerHTML = `<tr><th>rule</th><th>observation</th><th>weights</th></tr>` + r.rules.evidence.map((e) => `<tr><td class="mono">${esc(e.rule)}</td><td>${esc(e.detail)}</td><td class="mono">${esc(fmtW(e.weights))}</td></tr>`).join("");
   $("tokens").innerHTML = r.top_tokens.length ? `<p class="muted" style="margin-top:10px">Learned tokens favouring <b>${esc(top)}</b> over <b>${esc(r.second)}</b> (words, bigrams, § = style tokens):</p><p>${r.top_tokens.map((t) => `<span class="tag" title="log-odds ${t.delta}, count ${t.n}">${esc(t.token)} ${t.delta > 0 ? "+" : ""}${t.delta}</span>`).join(" ")}</p>` : "";
   $("watermark").innerHTML = `<p><b>${esc(FAMILIES[top].name.split(" (")[0])}</b>: ${esc(WATERMARK_STATUS[top] || "")}</p><p class="muted">Character-level scan above is the only part of a watermark a third party can read. Token-choice watermarks change which of several equally good words is picked, leave no visible trace, and are provably unreadable without the key. Public presence tests (Gloaguen et al., ICLR 2025) need hundreds to thousands of fresh generations from the model, not a single text.</p>`;
-  $("model-info").textContent = MODEL && MODEL.n_samples ? `Loaded fingerprint: ${MODEL.n_samples} labelled samples (${Object.entries(MODEL.per_family || {}).map(([k, v]) => `${k} ${v}`).join(", ")}), trained ${MODEL.trained_at.slice(0, 10)}.` : "No trained fingerprint bundled yet: verdicts come from hand rules only.";
+  $("model-info").textContent = modelInfoText();
+}
+
+function modelInfoText() {
+  if (!(MODEL && MODEL.n_samples)) return "No trained fingerprint bundled yet: verdicts come from hand rules only.";
+  const fams = Object.entries(MODEL.per_family || {}).map(([k, v]) => `${k} ${v}`).join(", ");
+  const fe = MODEL.eval && MODEL.eval.family;
+  const famNote = fe ? ` Hold-one-prompt-out family accuracy: ${Math.round(100 * fe.accuracy)}% (chance ${Math.round(100 * fe.chance)}%).` : " Only one provider family in the corpus so far, so the learned part cannot separate providers yet.";
+  return `Loaded fingerprint: ${MODEL.n_samples} labelled samples (${fams}), trained ${MODEL.trained_at.slice(0, 10)}.${famNote}`;
 }
 
 function run() {
@@ -69,4 +79,4 @@ $("teach-export").addEventListener("click", () => {
   a.click();
 });
 $("teach-clear").addEventListener("click", () => { save([]); refresh(); });
-$("model-info").textContent = MODEL && MODEL.n_samples ? `Loaded fingerprint: ${MODEL.n_samples} labelled samples, trained ${MODEL.trained_at.slice(0, 10)}.` : "No trained fingerprint bundled yet: verdicts come from hand rules only.";
+$("model-info").textContent = modelInfoText();

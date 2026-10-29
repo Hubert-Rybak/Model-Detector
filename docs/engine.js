@@ -492,13 +492,29 @@ export function rulesScore(f, u) {
 
 // ------------------------------------------------------------------ 4. Token bag + naive Bayes
 const bucket = (x, edges) => { let i = 0; while (i < edges.length && x >= edges[i]) i++; return i; };
-export function tokenize(text, f) {
+// Function words carry style, not topic; used by the "style" tokenizer mode.
+export const FUNCTION_WORDS = new Set(("a an the and or but so yet nor for of to in on at by with from into onto over under about above below between through during before after " +
+  "is are was were be been being am do does did done have has had having will would can could should may might must shall ought " +
+  "i me my mine we us our ours you your yours he him his she her hers it its they them their theirs this that these those who whom whose which what where when why how " +
+  "not no yes if then than as because while although though whether either neither both each every all any some few many much more most less least very really quite rather just only even also too " +
+  "here there now then once again still already ever never always often sometimes usually generally actually basically essentially simply literally honestly genuinely probably likely maybe perhaps " +
+  "first second next last finally overall however therefore thus hence otherwise instead meanwhile anyway besides moreover furthermore additionally plus " +
+  "one two three four five ten few lot lots bit little big small good bad best worst better worse great real sure okay ok right well like get got make made go going want need think know say said let " +
+  "it's that's there's here's i'm i'd i'll i've you're you'll you've we're they're isn't aren't wasn't weren't don't doesn't didn't won't wouldn't can't couldn't shouldn't haven't hasn't hadn't " +
+  "something anything nothing everything someone anyone everyone thing things way ways kind sort stuff").split(/\s+/));
+export function tokenize(text, f, { mode = "all" } = {}) {
   f = f || extractFeatures(text);
   const bag = new Map();
   const add = (t, n = 1) => bag.set(t, (bag.get(t) || 0) + n);
   const prose = stripCode(text).toLowerCase().replace(/[\u2019\u2018]/g, "'");
   const words = prose.match(/[a-z][a-z']*/g) || [];
-  for (let i = 0; i < words.length; i++) { add(words[i]); if (i + 1 < words.length) add(words[i] + "_" + words[i + 1]); }
+  if (mode === "all") {
+    for (let i = 0; i < words.length; i++) { add(words[i]); if (i + 1 < words.length) add(words[i] + "_" + words[i + 1]); }
+  } else if (mode === "style") {
+    // function-word unigrams and bigrams only (topic words replaced by a placeholder in bigrams)
+    const fw = words.map((w) => (FUNCTION_WORDS.has(w) ? w : "_"));
+    for (let i = 0; i < fw.length; i++) { if (fw[i] !== "_") add(fw[i]); if (i + 1 < fw.length && (fw[i] !== "_" || fw[i + 1] !== "_")) add(fw[i] + "_" + fw[i + 1]); }
+  }
   const S = 2; // style tokens weigh double
   const style = {
     "§h1": f.headers_h1, "§h2": f.headers_h2, "§h3": f.headers_h3, "§bold": f.bold_spans, "§bold_line": f.bold_whole_line, "§italic": f.italic_spans,
@@ -530,25 +546,32 @@ export function tokenize(text, f) {
 export function trainNB(samples, { minDf = 1, level = "family" } = {}) {
   const classes = {};
   const df = new Map();
+  const bg = {};
   for (const s of samples) {
     const label = level === "model" ? s.model : s.family;
     if (!label) continue;
     const bag = s.bag || tokenize(s.text);
     const c = (classes[label] ||= { docs: 0, total: 0, counts: {} });
     c.docs++;
-    for (const [t, n] of bag) { c.counts[t] = (c.counts[t] || 0) + n; c.total += n; df.set(t, (df.get(t) || 0) + 1); }
+    for (const [t, n] of bag) { c.counts[t] = (c.counts[t] || 0) + n; c.total += n; df.set(t, (df.get(t) || 0) + 1); bg[t] = (bg[t] || 0) + n; }
   }
   const vocab = [...df.entries()].filter(([, d]) => d >= minDf).map(([t]) => t).sort();
   const vset = new Set(vocab);
   for (const c of Object.values(classes)) { c.total = 0; for (const t of Object.keys(c.counts)) { if (!vset.has(t)) delete c.counts[t]; else c.total += c.counts[t]; } }
-  return { level, vocab_size: vocab.length, n_docs: samples.length, alpha: 0.5, classes };
+  let bgTotal = 0;
+  for (const t of Object.keys(bg)) { if (!vset.has(t)) delete bg[t]; else bgTotal += bg[t]; }
+  return { level, vocab_size: vocab.length, n_docs: samples.length, alpha: 0.5, lambda: 0.3, classes, background: { counts: bg, total: bgTotal } };
 }
 
 export function nbScore(bag, model, { temperature = null } = {}) {
   if (!model || !model.classes || !Object.keys(model.classes).length) return null;
-  const V = Math.max(1, model.vocab_size), a = model.alpha ?? 0.5;
+  const V = Math.max(1, model.vocab_size), a = model.alpha ?? 0.5, lam = model.lambda ?? 0.3;
   const names = Object.keys(model.classes);
   const totalDocs = names.reduce((s, k) => s + model.classes[k].docs, 0);
+  const bg = model.background || { counts: {}, total: 0 };
+  // Jelinek-Mercer smoothing against the corpus background: tokens unseen in a class fall back
+  // to the same background probability for every class, so class size does not bias the score.
+  const pbg = (t) => ((bg.counts[t] || 0) + a) / (bg.total + a * V);
   const ll = {}, contrib = {};
   let nTok = 0;
   for (const [, n] of bag) nTok += n;
@@ -557,12 +580,12 @@ export function nbScore(bag, model, { temperature = null } = {}) {
     let s = Math.log(c.docs / totalDocs);
     const parts = [];
     for (const [t, n] of bag) {
-      const lp = Math.log(((c.counts[t] || 0) + a) / (c.total + a * V));
+      const pc = c.total ? (c.counts[t] || 0) / c.total : 0;
+      const lp = Math.log((1 - lam) * pc + lam * pbg(t));
       s += n * lp; parts.push([t, n * lp, n]);
     }
     ll[k] = s; contrib[k] = parts;
   }
-  // temper by length so very long texts do not give p = 1.0 on correlated tokens
   const tau = temperature ?? Math.min(1, 120 / Math.max(1, nTok));
   const best = Math.max(...Object.values(ll));
   const logodds = Object.fromEntries(names.map((k) => [k, (ll[k] - best) * tau]));
@@ -590,7 +613,7 @@ export function analyze(text, model) {
   const hidden = decodeHidden(text);
   const f = extractFeatures(text);
   const rules = rulesScore(f, u);
-  const bag = tokenize(text, f);
+  const bag = tokenize(text, f, { mode: (model && model.features) || "all" });
   const fam = model && model.family ? nbScore(bag, model.family) : null;
   const combined = {};
   for (const k of FAMILY_IDS) combined[k] = FAMILIES[k].prior + rules.scores[k];
