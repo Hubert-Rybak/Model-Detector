@@ -93,6 +93,42 @@ model versions at 95% (LLMmap, USENIX Security 2025); one-word random-choice ans
 temperature 1 fingerprint 167 models (Bruckner 2026). This tool implements a transparent,
 rule-based version of those ideas that works from a handful of chat replies.
 
+## Keys and entropy: what the secret actually is
+
+`tools/watermark_demo.py` (no dependencies) shows the whole mechanism on a toy model built
+from the corpus: a random key, detection with the right and wrong keys, brute-force cost
+against key size, bits of evidence per token, and how a model ID would be embedded if a vendor
+chose to. What the public implementations use as a key:
+
+| Scheme | The key | Context it is mixed with | Pseudorandom function | Stated key size |
+|---|---|---|---|---|
+| Google SynthID-Text, research release | one integer `key` plus `depth` (tournament layers, 30 by default) | previous 4 tokens (`ngram_len` 5) plus the candidate token | 20-round Threefry 2x32 counter PRNG, Bernoulli(0.5) g-value bits per layer | 63 bits; the repo adds "no guarantees of cryptographic security" and notes the Gemini app uses a different hash |
+| SynthID-Text, Hugging Face port | `keys: list[int]`, one per layer (docs example: 9 small integers) | same n-gram | linear congruential fold (multiplier 6364136223846793005, increment 1) into an int64, taken modulo a seeded 65536-entry 0/1 table | unspecified; because of the modulo, only the low 16 bits of each layer key can matter |
+| Kirchenbauer red-green, Hugging Face port | one integer `hashing_key` (default 15485863, "use another private key") | previous token (`lefthash`) or the candidate itself (`selfhash`) | seed = key x previous token id, mod 2^64-1, then a seeded permutation; first 25% of the vocabulary is green, bias 2.0 | 64-bit seed |
+| OpenAI textGrain | secret key of a keyed PRF | up to L_ctx previous tokens | Gumbel-distributed costs per (vocabulary block, column); block optimal transport | unpublished |
+| Anthropic | "our key" | "a few words that come before" | "a version of the SynthID-Text approach" | unpublished |
+
+Three different entropies are involved, and they answer different questions:
+
+- **Key entropy** decides whether an outsider can recover the key. The demo recovers a 16-bit
+  key from one 300-token text in about a minute of single-core time, which extrapolates to
+  months for 32 bits and to geological time for 63 bits or more, and that is before the
+  attacker also has to guess the tokenizer, context length and hash function. The known
+  practical attack is not brute force but "watermark stealing": querying the model tens of
+  thousands of times to approximate which tokens it favours after which contexts.
+- **Signal entropy** decides how much text a detector needs. A red-green mark at bias 2.0 gives
+  about 0.2 bits of evidence per scored token in the demo, so roughly 100 tokens for a
+  one-in-a-million false-positive rate; the non-distortionary SynthID configuration that
+  vendors describe is weaker, with family-level evaluations reporting roughly 40% detection at
+  200 tokens and 60% at 400 tokens at 1% false positives. Only positions where the model has a
+  real choice can carry the mark, which is why code, numbers and fixed phrases stay unmarked.
+- **Payload entropy** decides what the mark can say. The deployed marks are zero-bit: they
+  answer "was this generated under key K", nothing more. A model name would have to be carried
+  by choosing among several keys (the demo's last section embeds an 8-bit ID this way and reads
+  it back by trying 256 derived keys), and reading it still needs the master key. Anthropic
+  states its mark carries no identifying information, and the forensic sweep on 40 samples
+  found no other channel.
+
 ## Research toolkit (Python)
 
 The probe protocol extracts three evidence layers from the replies to [PROTOCOL.md](PROTOCOL.md):
